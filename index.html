@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quin & MThư - Mật Mã Yêu Thương 20/10</title>
+  <meta name="description" content="Trò chơi phiêu lưu giải đố lãng mạn 20/10 phong cách hoạt hình ấm áp dành tặng vợ yêu MThư từ anh Quin.">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>">
+</head>
+<body>
+
+  <!-- CÁNH HOA RƠI LÃNG MẠN -->
+  <div id="petals-container" class="petals-container"></div>
+
+  <!-- CONTAINER ÂM THANH NỀN (FOLDER song/ & YOUTUBE STREAM FALLBACK) -->
+  <div id="yt-audio-container" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
+  <audio id="bgm-audio-player" loop></audio>
+
+  <!-- TOP HEADER & THANH ĐIỀU HƯỚNG -->
+  <header class="game-header">
+    <div class="game-title">
+      <span class="title-badge">🌹 QUIN & MTHƯ 20/10</span>
+      <div id="room-indicator" class="room-indicator">Phòng 1: Phòng Khách Ngập Hoa 🌹</div>
+    </div>
+
+    <!-- Music Status Pill -->
+    <div id="music-status-pill" class="music-status-pill" title="Bấm để Tắt/Bật nhạc (Folder song/)">
+      <div class="music-bars">
+        <div class="music-bar"></div>
+        <div class="music-bar"></div>
+        <div class="music-bar"></div>
+      </div>
+      <span id="music-track-title">Phase 1: Every Summertime (NIKI)</span>
+    </div>
+
+    <div class="nav-controls">
+      <button id="btn-prev-room" class="game-btn btn-secondary btn-nav-arrow" title="Về phòng trước">◀</button>
+      <button id="btn-next-room" class="game-btn btn-secondary btn-nav-arrow" title="Sang phòng kế">▶</button>
+      <button id="btn-husband-hint" class="game-btn btn-hint-pill">💡 Gợi Ý Của Quin</button>
+      <button id="btn-open-wall-gallery" class="game-btn btn-gallery-pill" title="Mở bộ sưu tập và đổi ảnh cho 5 khung tranh tường">🖼️ Tranh Treo Tường</button>
+      <button id="btn-toggle-calibrator" class="game-btn btn-calibrator-pill" title="Kéo thả trực quan và lưu tọa độ cho cả 3 phòng">🎯 Căn Chỉnh Vị Trí</button>
+    </div>
+  </header>
+
+  <!-- VÙNG BỐI CẢNH 3 CĂN PHÒNG & LAYER VẬT PHẨM RIÊNG BIỆT -->
+  <main class="game-viewport">
+    <!-- SÂN KHẤU CỐ ĐỊNH TỶ LỆ GỐC (511:287) ĐẢM BẢO F11 KHÔNG BAO GIỜ BỊ CO GIÃN LỆCH TỌA ĐỘ -->
+    <div id="game-stage" class="game-stage">
+
+      <!-- PHÒNG 1: PHÒNG KHÁCH NGẬP HOA (TONE NÂU TRẮNG) -->
+      <section id="room-scene-1" class="room-scene room-1 active">
+        <div class="scene-arrow arrow-right" data-goto-room="2" title="Sang Phòng Trang Điểm"></div>
+
+        <!-- Khung 1: Kỷ Niệm Quin & Minh Thư (Mảng tường ngoài cùng bên trái - Uốn nghiêng 3D) -->
+        <div class="hotspot" data-hotspot="painting_couple" data-dialogue-after="à hoá ra nó là mật khẩu của hộp gỗ, vở giỏi dạaaaa" data-frame-id="khung_1_ngoai_cung_trai" data-dialogue="Bức tranh này có ảnh và em, phía sau có dòng số 27/09/2007 và 20/06/2006  có ý gì nhỉ? Sinh nhật của chúng ta? Chắc chắn là có ý gì đó!" style="top: 10.3%; left: 1.7%; width: 13.1%; height: 32.9%;" title="Ảnh kỷ niệm Quin & Minh Thư">
+          <img src="assets/wall_frames/khung_1_ngoai_cung_trai/anh_2_om_guong_giu_nguyen_anh_goc.png" alt="Quin & Minh Thư">
+          <div class="hotspot-label">Quin & MThu</div>
+        </div>
+
+        <!-- Khung 2: Ảnh Treo Tường Trên Trái (Uốn nghiêng 3D) -->
+        <div class="hotspot" data-hotspot="painting_frame2" data-dialogue-after="Ảnh selfie trong thang máy của hai đứa mình nè vợ! Đáng yêu xỉu luôn á! ❤️" data-frame-id="khung_2_tren_trai" data-dialogue="Ảnh selfie trong thang máy của hai đứa mình nè vợ! Đáng yêu xỉu luôn á! ❤️" style="top: 6.8%; left: 15.1%; width: 9%; height: 20%;" title="Ảnh Selfie Thang Máy">
+          <img src="assets/wall_frames/khung_2_tren_trai/anh_3_selfie_thang_may_giu_nguyen_anh_goc.png" alt="Selfie Thang Máy">
+          <div class="hotspot-label">anh và vợ chụp ở thang máy :3</div>
+        </div>
+
+        <!-- Tờ Lịch lật được 3D: Mặt trước 27/09/2007 - Mặt sau 20/10/2026 -->
+        <div id="calendar-hotspot" class="hotspot" data-hotspot="calendar" data-dialogue-after="Lịch đã xé tới 20/10/2026, chúc vợ 20/10 vui vẻ ạaaa gửi tới Mẹ Ái và ngoại giúp anh lun nhaaaaa :3333" data-dialogue="Lịch đã xé tới 20/10/2026, chúc vợ 20/10 vui vẻ ạaaa gửi tới Mẹ Ái và ngoại giúp anh lun nhaaaaa :3333" style="top: 32.6%; left: 17.5%; width: 9%; height: 20%;">
+          <div id="flipping-calendar" class="flipping-calendar">
+            <div class="calendar-card">
+              <!-- Mặt trước: Ngày 27/09/2007 (Sinh nhật Minh Thư) -->
+              <div class="cal-page cal-front">
+                <img src="assets/sprites/calendar_2709.png" alt="Lịch 27/09/2007">
+              </div>
+              <!-- Mặt sau: Ngày 20/10/2026 (20/10 Ngày Của MThư ❤️) -->
+              <div class="cal-page cal-back">
+                <img src="assets/sprites/calendar_2010.png" alt="Lịch 20/10/2026">
+              </div>
+            </div>
+          </div>
+          <div class="hotspot-label">📅 Lịch</div>
+        </div>
+
+        <!-- Khung 3: Ảnh Kỷ Niệm / Đêm Đầy Sao (Mảng tường phía trên ở giữa - Uốn nghiêng 3D) -->
+        <div class="hotspot" data-hotspot="painting_stars" data-dialogue-after="lúc này vợ xinh gái điên và anh cũng chụp lại ngôi sao may mắn của anh :3⭐" data-frame-id="khung_3_giua_tren" data-dialogue="lúc này vợ xinh gái điên và anh cũng chụp lại ngôi sao may mắn của anh :3⭐" style="top: 15%; left: 32.8%; width: 8%; height: 16%;" title="Ảnh Kỷ Niệm">
+          <img src="assets/wall_frames/khung_3_giua_tren/anh_6_call_video_giu_nguyen_anh_goc.png" alt="Ảnh Kỷ Niệm">
+          <div class="hotspot-label">⭐lúc call video</div>
+        </div>
+
+        <!-- Khung 4: Chân Dung Bé Gấu Cưng (Mảng tường phía dưới ở giữa - Uốn nghiêng 3D) -->
+        <div class="hotspot" data-hotspot="painting_gau" data-dialogue-after="tay vợ mềm nhắm á :3 cũng thơm nữaaaaaaaaaaa" data-frame-id="khung_4_giua_duoi" data-dialogue="" style="top: 37.2%; left: 34.6%; width: 7.8%; height: 15.2%;" title="Chân dung Bé Gấu">
+          <img src="assets/wall_frames/khung_4_giua_duoi/anh_5_nam_tay_giu_nguyen_anh_goc.png" alt="Bé Gấu">
+          <div class="hotspot-label">🐶 Chân Dung Bé Gấu</div>
+        </div>
+
+        <!-- Khung 5: Thư Pháp Mật Mã 27 & 26 (Mảng tường gần rèm cửa bên phải - Uốn nghiêng 3D) -->
+        <div class="hotspot" data-hotspot="painting_clue" data-dialogue-after="Gấu nó lúc bé dễ thương ghê ha vợ =))))))" data-frame-id="khung_5_tuong_phai" data-dialogue="Gấu nó lúc bé dễ thương ghê ha vợ =))))))" style="top: 17.2%; left: 45.3%; width: 9.4%; height: 26.7%;" title="Bức tranh Mật Mã 27 & 26">
+          <img src="assets/wall_frames/khung_5_tuong_phai/anh_1_cun_con_giu_nguyen_anh_goc.png" alt="Mật Mã 27 & 26">
+          <div class="hotspot-label">Gấu lúc bé</div>
+        </div>
+
+        <!-- Hộp Gỗ Khóa 4 Số (Đặt chuẩn trên nóc kệ tủ gỗ thấp bên trái) -->
+        <div class="hotspot" data-hotspot="wooden_box" data-dialogue-after="giỏi thía hộp này gặp anh chắc phải 3 ngày mới giải được cơ ^^" data-dialogue="Hộp kỳ lạ có thể xoay số? Nó làm gì?" style="top: 49.6%; left: 15.4%; width: 11.5%; height: 13.9%;">
+          <img id="sprite-wooden-box" src="assets/sprites/wooden_box_closed.png" alt="Hộp Gỗ 4 Số">
+          <div class="hotspot-label">🔒 Hộp Gỗ (Mã 2726)</div>
+        </div>
+
+        <!-- Bé Gấu Canh Chìa Khóa (Ban đầu ngủ say đè chìa khóa, khi ăn xương ngồi dậy mừng rỡ để lộ chìa khóa bên cạnh) -->
+        <div id="dog-hotspot" class="hotspot" data-hotspot="dog" data-dialogue="Má, con gấu nó đang ngủ say đè trên chìa khoá kìa vợ, bấm vào người nó lần nữa để gọi nó dậy xem sao nhen" data-dialogue-after="Khổ thân vợ tui, nó nặng như quỷ =)))))) giờ có ùi làm gì tiếp đây?" style="top: 60.1%; left: 18.3%; width: 24.1%; height: 36.1%;">
+          <img id="sprite-dog" src="assets/sprites/dog_happy.png" alt="Bé Gấu Ngủ Đè Chìa Khóa">
+          <div class="hotspot-label">🐶 Bé Gấu (Cún Cưng)</div>
+        </div>
+
+        <!-- Chìa Khóa Đồng Rơi Bên Cạnh Bé Gấu (Hiện ra khi Bé Gấu ngồi dậy, nhặt rồi sẽ biến mất) -->
+        <div id="dog-key-hotspot" class="hotspot item-revealed" data-hotspot="dog_key" style="top: 76%; left: 36.5%; width: 6.5%; height: 11%; display: none; z-index: 15; cursor: pointer;" title="Nhặt Chìa Khóa Đồng Nhỏ">
+          <img id="sprite-dog-key" src="assets/items/small_key.png" alt="Chìa Khóa Đồng Nhỏ" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7)); animation: keyShinePulse 1.8s infinite alternate;">
+          <div class="hotspot-label">🔑 Chìa Khóa</div>
+        </div>
+
+        <!-- 2 Ly Trà Sữa Đường Đen (Đặt chuẩn trên bàn trà thấp ở giữa phòng) -->
+        <div class="hotspot" data-hotspot="milktea" data-dialogue-after="Chà con mắm uống xong lại không dọn rồi, cực vợ nữa ùi :<" data-dialogue="Chà con mắm uống xong lại không dọn rồi, cực vợ nữa ùi :<" style="top: 55.8%; left: 44.7%; width: 13%; height: 20%;">
+          <img src="assets/sprites/milktea.png" alt="2 Ly Trà Sữa">
+          <div class="hotspot-label">🧋 2 Ly Trà Sữa</div>
+        </div>
+
+        <!-- Bình Hoa Hồng (Đặt chuẩn trên bàn gỗ lớn tiền cảnh bên phải) -->
+        <div class="hotspot" data-hotspot="roses_vase" data-dialogue-after="Hoa này là hoa sinh nhật của em á, nhớ lại vui gheeeeeee" data-dialogue="Hoa này là hoa sinh nhật của em á, nhớ lại vui gheeeeeee" style="top: 41.4%; left: 77.7%; width: 18.6%; height: 55.3%;">
+          <img src="assets/sprites/roses_vase.png" alt="Bình Hoa Hồng">
+          <div class="hotspot-label">🌹 Bình Hoa Hồng</div>
+        </div>
+      </section>
+
+      <!-- PHÒNG 2: BÀN TRANG ĐIỂM & TỦ BÍ MẬT (TONE NÂU TRẮNG) -->
+      <section id="room-scene-2" class="room-scene room-2">
+        <div class="scene-arrow arrow-left" data-goto-room="1" title="Về Phòng Khách"></div>
+        <div class="scene-arrow arrow-right" data-goto-room="3" title="Ra Ban Công"></div>
+
+        <!-- Chú Gấu Bông Nâu (Ngồi chuẩn trên ghế bành nhung bên trái - Có bánh gặm trong túi) -->
+        <div class="hotspot" data-hotspot="teddy" data-dialogue-after="Túi áo của chú gấu bông nâu đã trống sau khi lấy xương gặm rồi 🧸" data-dialogue="Quin này nhìn hơi lạ =)))) nhưng hình như trong túi có gì đó, à thì ra là xương gậm cho Gấu nè" style="top: 63%; left: 21.8%; width: 17.5%; height: 35.1%;">
+          <img id="sprite-teddy" class="with-bone" src="assets/sprites/teddy_with_bone.png" alt="Gấu Bông Nâu">
+          <div class="hotspot-label">🧸 Gấu Bông Nâu</div>
+        </div>
+
+        <!-- Két Sắt Chữ Cái Bí Mật (Gắn chuẩn khít trong hốc tường vòm bên trái) -->
+        <div class="hotspot" data-hotspot="safe" data-dialogue-after="Vợ giỏi cáaaaa vợ mở được ùi xem túi đồ có gì chưa, chắc nó mở gì á 🔐" data-dialogue="Một cái két gì đó chỉ có thể ghi bằng chữ nhưng chữ gì ta?" style="top: 15.3%; left: 23.6%; width: 19.3%; height: 50.8%;">
+          <img id="sprite-safe" src="assets/objects/safe.png" alt="Két Sắt Bí Mật">
+          <div class="hotspot-label">🔐 Két Sắt Bí Mật</div>
+        </div>
+
+        <!-- Hộp Trang Sức Hoàng Gia (Đặt chuẩn trên bàn trang điểm) -->
+        <div class="hotspot" data-hotspot="jewelry_box" data-dialogue-after="Hộp trang sức hoàng gia đã mở! Pin Trái Tim & Mảnh Tim (Trái) đã được cất vào túi đồ rùi áaaaaaaaaa! 💎" data-dialogue="hiếm hoi lắm vợ mới mua đồ trang điểm cho bản thân nên anh cất ở đây :3" style="top: 55.9%; left: 46%; width: 12%; height: 16%;">
+          <img id="sprite-jewelry-box" src="assets/sprites/jewelry_box_closed.png" alt="Hộp Trang Sức">
+          <div class="hotspot-label">💎 Hộp Trang Sức</div>
+        </div>
+
+        <!-- Tờ Giấy Nụ Hôn Son / Mật Mã Chìm VOYEU (Đặt chuẩn trên bàn trang điểm) -->
+        <div class="hotspot hotspot-paper-container" data-hotspot="paper" data-dialogue-after="Tờ giấy hiện rõ 5 chữ cái tình yêu: V - O - Y - E - U! Mật mã mở két sắt đó vợ ơi! 📄💋" data-dialogue="Tờ giấy in dấu nụ hôn môi son đỏ thắm thật quyến rũ. Hãy thắp nến thơm ngoài ban công và hơ tờ giấy qua hơi nóng để làm hiện mật mã ẩn giấu nha!" style="top: 61%; left: 71.9%; width: 10.9%; height: 15.8%;">
+          <img id="sprite-paper" src="assets/sprites/paper_blank.png" alt="Tờ Giấy Nụ Hôn Son" class="paper-faint">
+          <div class="hotspot-label">💋 Tờ Giấy Nụ Hôn</div>
+        </div>
+      </section>
+
+      <!-- PHÒNG 3: BAN CÔNG ÁNH NẾN (TONE NÂU TRẮNG & BẦU TRỜI ĐÊM) -->
+      <section id="room-scene-3" class="room-scene room-3">
+        <div class="scene-arrow arrow-left" data-goto-room="2" title="Về Phòng Trang Điểm"></div>
+
+        <!-- LỚP PHỦ ÁNH SÁNG ĐÈN ĐOM ĐÓM KHI LẮP PIN -->
+        <div id="fairy-lights-overlay" class="fairy-lights-overlay"></div>
+
+        <!-- Nến Thơm & Thiệp Cảm Nhiệt (Đặt chuẩn trên bàn cẩm thạch nhỏ bên trái) -->
+        <div class="hotspot" data-hotspot="candle" data-dialogue="Cây nến thơm chưa thắp lửa, bên dưới có tấm thiệp in mực cảm nhiệt." data-dialogue-after="Ngọn nến thơm ấm áp bùng sáng! Hơi nóng làm thiệp cảm nhiệt hiện rõ: 🌹 ➔ 👑 ➔ 💖 ➔ 💎" style="top: 35.1%; left: 20.9%; width: 12%; height: 26%;">
+          <img id="sprite-candle" src="assets/sprites/candle_lit.png" alt="Nến Thơm & Thiệp" class="candle-unlit">
+          <div class="hotspot-label">🕯️ Nến Thơm & Thiệp</div>
+        </div>
+
+        <!-- Nguồn Dây Đèn Đom Đóm (Gần lan can và đèn lồng bên trái) -->
+        <div class="hotspot" data-hotspot="switch" data-dialogue-after="Dây đèn đom đóm bừng sáng lung linh trên bầu trời đêm ban công! Đẹp quá vợ ơiiii ✨" data-dialogue="Thiên lý ơi em có thể ở lại đây không =)))) cái này cần viên pin gì đó vợ thử tìm xem" style="top: 72.5%; left: 0.4%; width: 9%; height: 13%;">
+          <img id="sprite-switch" src="assets/sprites/switch_box.png" alt="Hộp Nguồn Đèn">
+          <div class="hotspot-label">💡 Nguồn Đèn Đom Đóm</div>
+        </div>
+
+        <!-- Rương Báu Đại Lễ 20/10 (Đặt chuẩn trên bục nhung đen chính giữa ban công) -->
+        <div class="hotspot" data-hotspot="final_chest" data-dialogue-after="hehe vợ giỏi dạaaa xem hết thư i có thú vị lắm áaaa! 👑" data-dialogue="Rương này hơi lạ nó cần 2 mảnh trái tim và nhập mật khẩu, vợ thử tìm đâu đó xem" style="top: 27.4%; left: 55.2%; width: 19.5%; height: 21.6%;">
+          <img id="sprite-chest" src="assets/sprites/chest_closed.png" alt="Rương Báu 20/10">
+          <div class="hotspot-label">🎁 Rương Báu 20/10</div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- HỘP THOẠI & DÒNG CHỮ (AVATAR QUIN CHUẨN ẢNH THẬT) -->
+  <section class="dialogue-dock">
+    <div class="dialogue-avatar">
+      <img src="assets/sprites/quin.png" alt="Anh Quin">
+    </div>
+    <div class="dialogue-content">
+      <div class="dialogue-speaker">💖 ANH QUIN</div>
+      <div id="dialogue-text" class="dialogue-text">...</div>
+    </div>
+  </section>
+
+  <!-- THANH TÚI ĐỒ (INVENTORY DOCK) THIẾT KẾ ĐẶC SẮC TONE NÂU VÀNG -->
+  <footer id="inventory-dock" class="inventory-dock">
+    <!-- Render động 6 slots với khung gỗ nâu & ánh vàng sang trọng -->
+  </footer>
+
+  <!-- ========================================================
+       CÁC MODAL GIẢI ĐỐ ĐÀNG HOÀNG
+       ======================================================== -->
+
+  <!-- 1. MODAL HỘP GỖ 4 SỐ (BÁNH LĂN ĐỒNG 0-9) -->
+  <div id="modal-wooden_box" class="custom-modal-backdrop">
+    <div class="custom-modal-window">
+      <div class="modal-close-x" data-close-modal>✕</div>
+      <div class="modal-header-ornate">
+        <h3 class="modal-title">Ổ KHÓA HỘP GỖ 4 SỐ</h3>
+        <p class="modal-subtitle">Gợi ý: Mật mã tình yêu ngày sinh của vợ (27/9/2007) và anh (2006) ❤️</p>
+      </div>
+      <div class="modal-body">
+        <div id="visual-wooden-box" class="lock-scene-visual" style="background-image: url('assets/ui/lock_wooden.png');"></div>
+
+        <!-- BỘ 4 BÁNH LĂN ĐỒNG CUỘN 3D DẢI 0-9 -->
+        <div class="reel-dials-group" id="wood-reels">
+          <!-- Dial 0 -->
+          <div class="reel-column">
+            <button id="wood-dial-up-0" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="wood" data-reel-index="0" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="wood-reel-strip-0" alt="Reel 0">
+            </div>
+            <button id="wood-dial-down-0" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+          <!-- Dial 1 -->
+          <div class="reel-column">
+            <button id="wood-dial-up-1" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="wood" data-reel-index="1" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="wood-reel-strip-1" alt="Reel 1">
+            </div>
+            <button id="wood-dial-down-1" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+          <!-- Dial 2 -->
+          <div class="reel-column">
+            <button id="wood-dial-up-2" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="wood" data-reel-index="2" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="wood-reel-strip-2" alt="Reel 2">
+            </div>
+            <button id="wood-dial-down-2" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+          <!-- Dial 3 -->
+          <div class="reel-column">
+            <button id="wood-dial-up-3" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="wood" data-reel-index="3" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="wood-reel-strip-3" alt="Reel 3">
+            </div>
+            <button id="wood-dial-down-3" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; margin-top: 10px;">
+          <button id="btn-submit-wood" class="btn-submit-ornate">
+            <img src="assets/ui/btn_submit_wide.png" alt="Submit">
+            <span>🔓 Mở Khóa Hộp Gỗ</span>
+          </button>
+          <button class="game-btn btn-secondary" data-close-modal>Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MODAL HỘP TRANG SỨC HOÀNG GIA (6 HUY HIỆU VÀNG) -->
+  <div id="modal-jewelry_box" class="custom-modal-backdrop">
+    <div class="custom-modal-window">
+      <div class="modal-close-x" data-close-modal>✕</div>
+      <div class="modal-header-ornate">
+        <h3 class="modal-title">HỘP TRANG SỨC HOÀNG GIA</h3>
+        <p class="modal-subtitle">Nhấp vào từng ô tròn để xoay huy hiệu vàng theo tấm thiệp cảm nhiệt</p>
+      </div>
+      <div class="modal-body">
+        <div id="visual-jewelry-box" class="lock-scene-visual" style="background-image: url('assets/ui/lock_jewelry.png');"></div>
+
+        <div class="symbols-container">
+          <div id="jewelry-dial-0" class="symbol-dial-box" data-symbol-index="0" title="Bấm để đổi huy hiệu">
+            <img src="assets/ui/icon_rose.png" alt="Rose">
+          </div>
+          <div id="jewelry-dial-1" class="symbol-dial-box" data-symbol-index="1" title="Bấm để đổi huy hiệu">
+            <img src="assets/ui/icon_rose.png" alt="Rose">
+          </div>
+          <div id="jewelry-dial-2" class="symbol-dial-box" data-symbol-index="2" title="Bấm để đổi huy hiệu">
+            <img src="assets/ui/icon_rose.png" alt="Rose">
+          </div>
+          <div id="jewelry-dial-3" class="symbol-dial-box" data-symbol-index="3" title="Bấm để đổi huy hiệu">
+            <img src="assets/ui/icon_rose.png" alt="Rose">
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; margin-top: 10px;">
+          <button id="btn-submit-jewelry" class="btn-submit-ornate">
+            <img src="assets/ui/btn_submit_wide.png" alt="Submit">
+            <span>🔓 Mở Khóa Hộp</span>
+          </button>
+          <button class="game-btn btn-secondary" data-close-modal>Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MODAL KÉT SẮT CHỮ CÁI (KEYCAP 3D CREAM/BROWN/GOLD) -->
+  <div id="modal-safe" class="custom-modal-backdrop">
+    <div class="custom-modal-window" style="max-width: 580px;">
+      <div class="modal-close-x" data-close-modal>✕</div>
+      <div class="modal-header-ornate">
+        <h3 class="modal-title">KÉT SẮT BÍ MẬT</h3>
+        <p class="modal-subtitle">Tra chìa khóa cơ trước, sau đó nhập 5 chữ cái tình yêu</p>
+      </div>
+      <div class="modal-body">
+        <div id="visual-safe" class="lock-scene-visual" style="background-image: url('assets/ui/lock_safe.png');"></div>
+
+        <div class="safe-key-dock">
+          <div class="safe-keyhole-indicator" id="safe-keyhole-status">
+            <img id="img-safe-keyhole" src="assets/ui/keyhole_locked.png" alt="Khóa cơ">
+            <span id="safe-keyhole-label">Ổ Khóa Cơ: Đang Khóa</span>
+          </div>
+          <button id="btn-safe-keyhole" class="game-btn safe-keyhole-btn">
+            <img src="assets/ui/key_icon.png" alt="Key" style="width: 22px; height: 14px; object-fit: contain;"> Tra Chìa Khóa Đồng
+          </button>
+        </div>
+
+        <div id="safe-code-display" class="safe-screen">_ _ _ _ _</div>
+
+        <!-- BÀN PHÍM CƠ 3D KEYCAP CREAM/BROWN/GOLD (7 CỘT x 4 HÀNG) -->
+        <div class="safe-keypad-grid">
+          <button class="keypad-key" data-safe-key="A">A</button>
+          <button class="keypad-key" data-safe-key="B">B</button>
+          <button class="keypad-key" data-safe-key="C">C</button>
+          <button class="keypad-key" data-safe-key="D">D</button>
+          <button class="keypad-key" data-safe-key="E">E</button>
+          <button class="keypad-key" data-safe-key="F">F</button>
+          <button class="keypad-key" data-safe-key="G">G</button>
+
+          <button class="keypad-key" data-safe-key="H">H</button>
+          <button class="keypad-key" data-safe-key="I">I</button>
+          <button class="keypad-key" data-safe-key="J">J</button>
+          <button class="keypad-key" data-safe-key="K">K</button>
+          <button class="keypad-key" data-safe-key="L">L</button>
+          <button class="keypad-key" data-safe-key="M">M</button>
+          <button class="keypad-key" data-safe-key="N">N</button>
+
+          <button class="keypad-key" data-safe-key="O">O</button>
+          <button class="keypad-key" data-safe-key="P">P</button>
+          <button class="keypad-key" data-safe-key="Q">Q</button>
+          <button class="keypad-key" data-safe-key="R">R</button>
+          <button class="keypad-key" data-safe-key="S">S</button>
+          <button class="keypad-key" data-safe-key="T">T</button>
+          <button class="keypad-key" data-safe-key="U">U</button>
+
+          <button class="keypad-key" data-safe-key="V">V</button>
+          <button class="keypad-key" data-safe-key="W">W</button>
+          <button class="keypad-key" data-safe-key="X">X</button>
+          <button class="keypad-key" data-safe-key="Y">Y</button>
+          <button class="keypad-key" data-safe-key="Z">Z</button>
+          <button class="keypad-key btn-clear" data-safe-key="CLEAR" title="Xóa ký tự">XÓA</button>
+          <button class="keypad-key btn-enter" data-safe-key="ENTER" title="Xác nhận gửi">GỬI</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. MODAL RƯƠNG BÁU ĐẠI LỄ 20/10 (2 MẢNH TIM & 4 BÁNH LĂN 2010) -->
+  <div id="modal-final_chest" class="custom-modal-backdrop">
+    <div class="custom-modal-window">
+      <div class="modal-close-x" data-close-modal>✕</div>
+      <div class="modal-header-ornate">
+        <h3 class="modal-title">RƯƠNG BÁU ĐẠI LỄ 20/10</h3>
+        <p class="modal-subtitle">Ghép đủ 2 Mảnh Trái Tim Vàng và nhập mã ngày lễ đặc biệt</p>
+      </div>
+      <div class="modal-body">
+        <div id="visual-chest" class="lock-scene-visual" style="background-image: url('assets/ui/lock_chest.png');"></div>
+
+        <div class="chest-heart-slots">
+          <div id="chest-slot-left" class="heart-slot-btn" title="Bấm để gắn Mảnh Trái Tim Trái">
+            <img src="assets/ui/heart_slot_left.png" alt="Khe Tim Trái" class="slot-placeholder-icon">
+            <span class="heart-slot-label">Mảnh Trái</span>
+          </div>
+          <div id="chest-slot-right" class="heart-slot-btn" title="Bấm để gắn Mảnh Trái Tim Phải">
+            <img src="assets/ui/heart_slot_right.png" alt="Khe Tim Phải" class="slot-placeholder-icon">
+            <span class="heart-slot-label">Mảnh Phải</span>
+          </div>
+        </div>
+
+        <!-- BỘ 4 BÁNH LĂN ĐỒNG CUỘN 3D DẢI 0-9 CHO MÃ 2010 -->
+        <div class="reel-dials-group" id="chest-reels">
+          <!-- Dial 0 -->
+          <div class="reel-column">
+            <button id="chest-dial-up-0" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="chest" data-reel-index="0" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="chest-reel-strip-0" alt="Reel 0">
+            </div>
+            <button id="chest-dial-down-0" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+          <!-- Dial 1 -->
+          <div class="reel-column">
+            <button id="chest-dial-up-1" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="chest" data-reel-index="1" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="chest-reel-strip-1" alt="Reel 1">
+            </div>
+            <button id="chest-dial-down-1" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+          <!-- Dial 2 -->
+          <div class="reel-column">
+            <button id="chest-dial-up-2" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="chest" data-reel-index="2" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="chest-reel-strip-2" alt="Reel 2">
+            </div>
+            <button id="chest-dial-down-2" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+          <!-- Dial 3 -->
+          <div class="reel-column">
+            <button id="chest-dial-up-3" class="reel-btn reel-up" title="Tăng số"><img src="assets/ui/dial_up.png" alt="▲"></button>
+            <div class="reel-window" data-reel-type="chest" data-reel-index="3" title="Cuộn chuột hoặc bấm ▲/▼ để đổi số">
+              <img src="assets/ui/reel_0_to_9.png" class="reel-strip" id="chest-reel-strip-3" alt="Reel 3">
+            </div>
+            <button id="chest-dial-down-3" class="reel-btn reel-down" title="Giảm số"><img src="assets/ui/dial_down.png" alt="▼"></button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; margin-top: 10px;">
+          <button id="btn-submit-chest" class="btn-submit-ornate">
+            <img src="assets/ui/btn_submit_wide.png" alt="Submit">
+            <span>👑 Mở Rương Đại Lễ</span>
+          </button>
+          <button class="game-btn btn-secondary" data-close-modal>Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. MODAL GỢI Ý CỦA QUIN -->
+  <div id="modal-husband-hint" class="custom-modal-backdrop">
+    <div class="custom-modal-window">
+      <div class="modal-close-x" data-close-modal>✕</div>
+      <div class="modal-header-ornate">
+        <h3 class="modal-title">GỢI Ý CỦA ANH QUIN</h3>
+        <p class="modal-subtitle">Anh luôn ở đây dỗ dành và đồng hành cùng vợ yêu!</p>
+      </div>
+      <div class="modal-body">
+        <div class="hint-modal-content">
+          <div class="hint-avatar-large">
+            <img src="assets/sprites/quin.png" alt="Anh Quin">
+          </div>
+          <div id="hint-modal-body" class="hint-speech-bubble">
+            Đang tải gợi ý...
+          </div>
+        </div>
+        <button class="game-btn" data-close-modal style="margin-top: 20px;">Dạ Em Hiểu Rồi Chồng Ơi ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SOI TỜ THIỆP CẢM NHIỆT (PHÓNG TO & CHỈNH THEO Ý THÍCH) -->
+  <div id="modal-inspect-card" class="custom-modal-backdrop">
+    <div class="inspect-card-window">
+      <div class="modal-close-x" data-close-modal>✕</div>
+      <div class="modal-header-ornate">
+        <h3 class="modal-title">💌 TỜ THIỆP CẢM NHIỆT BAN CÔNG</h3>
+        <p class="modal-subtitle" id="inspect-card-status">
+          Cây nến thơm chưa thắp lửa - Hơ nóng thiệp để làm hiện các mật mã ẩn!
+        </p>
+      </div>
+
+      <!-- THANH ĐIỀU KHIỂN PHÓNG TO / THU NHỎ THEO Ý THÍCH -->
+      <div class="inspect-card-toolbar">
+        <span class="toolbar-label" style="font-weight: 600; color: #fdf0d5; font-size: 0.88rem;">🔍 Phóng to/Thu nhỏ:</span>
+        <button id="btn-zoom-card-in" class="game-btn btn-zoom" title="Phóng to thiệp">🔍+ Phóng To</button>
+        <button id="btn-zoom-card-out" class="game-btn btn-zoom" title="Thu nhỏ thiệp">🔍- Thu Nhỏ</button>
+        <button id="btn-zoom-card-reset" class="game-btn btn-zoom" title="Về 100%">⟲ 100%</button>
+        <span id="zoom-card-level" class="zoom-level-text">100%</span>
+        <button id="btn-edit-card-content" class="game-btn btn-edit-pill" style="margin-left: auto; background: #6f3b1e; border: 1px solid var(--gold-warm); font-size: 0.85rem;" title="Chỉnh sửa nội dung thiệp theo ý thích">✏️ Chỉnh Sửa Thiệp</button>
+      </div>
+
+      <!-- KHUNG HIỂN THỊ TỜ THIỆP CÓ THỂ CUỘN VÀ PHÓNG TO (VỪA KHÍT KHUNG MODAL) -->
+      <div class="inspect-card-viewport" id="inspect-card-viewport">
+        <div class="inspect-card-sheet" id="inspect-card-sheet">
+          <div class="card-message" id="inspect-card-message">
+            "Gửi Minh Thư yêu dấu của Quin! Chiếc hộp trang sức hoàng gia bên phòng ngủ đang chờ vợ giải mã đó nha!"
+          </div>
+
+          <div class="thermal-clues-box" id="thermal-clues-box">
+            <div class="thermal-hint-unlit" id="thermal-hint-unlit">
+              🔥 <i>Mực cảm nhiệt đang ẩn dưới lớp giấy nến lạnh.<br>Hãy dùng Bật Lửa thắp Nến Thơm để nhiệt độ làm hiện rõ mật mã!</i>
+            </div>
+            <div class="thermal-clues-lit" id="thermal-clues-lit" style="display: none;">
+              <div class="thermal-symbol-card"><span class="sym-icon">🌹</span><span class="sym-name">Hoa Hồng</span></div>
+              <div class="thermal-arrow">➔</div>
+              <div class="thermal-symbol-card"><span class="sym-icon">👑</span><span class="sym-name">Vương Miện</span></div>
+              <div class="thermal-arrow">➔</div>
+              <div class="thermal-symbol-card"><span class="sym-icon">💖</span><span class="sym-name">Trái Tim</span></div>
+              <div class="thermal-arrow">➔</div>
+              <div class="thermal-symbol-card"><span class="sym-icon">💎</span><span class="sym-name">Kim Cương</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM CHỈNH SỬA THIỆP THEO Ý THÍCH (ẨN / HIỆN) -->
+      <div id="card-customizer-form" class="card-customizer-form" style="display: none;">
+        <div style="font-weight: 700; color: var(--gold-warm); margin-bottom: 8px;">✏️ Chỉnh sửa nội dung Tờ Thiệp theo ý thích:</div>
+        <div style="margin-bottom: 8px;">
+          <label style="font-size: 0.85rem; color: #fdf0d5;">Lời nhắn trên thiệp:</label>
+          <textarea id="card-inp-msg" rows="2" class="cal-textarea" style="width: 100%; margin-top: 4px;"></textarea>
+        </div>
+        <div style="margin-bottom: 8px;">
+          <label style="font-size: 0.85rem; color: #fdf0d5;">Chữ ký cuối thiệp:</label>
+          <input type="text" id="card-inp-sign" class="cal-text-input" style="width: 100%; margin-top: 4px;">
+        </div>
+        <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px;">
+          <button id="btn-save-card-custom" class="cal-btn-save" style="padding: 6px 16px;">💾 Lưu Nội Dung Thiệp</button>
+          <button id="btn-cancel-card-custom" class="game-btn btn-secondary" style="padding: 6px 14px;">Hủy</button>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 12px;">
+        <button class="game-btn" data-close-modal>Đóng Tờ Thiệp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PHASE 2: BÓ HOA NỞ RỘ & THƯ TÌNH
+       ======================================================== -->
+  <!-- Bó Hoa Nở Rộ Modal (Tích hợp IdeaToCodee/flowers-20-10 procedural blooming roses) -->
+  <div id="modal-bouquet-reveal" class="custom-modal-backdrop flowers-bouquet-fullscreen-backdrop">
+    <canvas id="ambientPetalsCanvas" class="ambient-petals-canvas" aria-hidden="true"></canvas>
+    <div class="flowers-bouquet-container">
+      <div class="modal-close-x" data-close-modal style="position: fixed; top: 20px; right: 24px; z-index: 250; background: rgba(50, 25, 12, 0.75); color: #f3ca7e; border: 1.5px solid #f3ca7e; border-radius: 50%;">✕</div>
+
+      <header class="bouquet-header-greeting">
+        <p class="bouquet-occasion">Ngày Phụ Nữ Việt Nam <span>20/10</span></p>
+        <h2 class="bouquet-title">Một bó hoa nhỏ,<br>gửi trọn yêu thương tới MThư ❤️</h2>
+        <p class="bouquet-subtitle">Mong hôm nay và mãi mãi về sau của vợ luôn ngập tràn dịu dàng và hạnh phúc.</p>
+      </header>
+
+      <div class="bouquet-composition">
+        <div id="bouquetStageWrapper" role="button" tabindex="0" title="Chạm vào bông hoa để xem lời thì thầm ngọt ngào hoặc mở thư tình!">
+          <canvas id="bouquetCanvas"></canvas>
+        </div>
+
+        <button class="envelope-button" id="openCard" type="button" title="Mở bức thư tình của Quin">
+          <span class="envelope"><span class="envelope-letter">Gửi Vợ</span><span class="envelope-seal">♡</span></span>
+          <span class="envelope-caption">Có một bức thư cho em</span>
+          <span class="envelope-action">Mở thư tình 💌</span>
+        </button>
+      </div>
+
+      <footer class="bouquet-footer-controls">
+        <p id="bouquetHint" class="bouquet-hint">Chạm một bông hoa để nhận lời thì thầm yêu thương ✨</p>
+        <p id="roseWish" class="rose-wish"></p>
+        <div class="bouquet-actions-row">
+          <button class="text-button" id="replayBloom" type="button">Cho hoa nở lại <span aria-hidden="true">↻</span></button>
+          <button class="primary-button bouquet-open-letter-btn" id="btn-open-letter-from-bouquet" type="button">
+            Đọc thư tình của Quin 💌
+          </button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Bức Thư Tình Modal (Tờ giấy letter_paper.png - Đầy đủ nội dung, không lia cam, không ghi chậm) -->
+  <div id="modal-love-letter" class="custom-modal-backdrop love-letter-fullscreen-backdrop">
+    <div class="letter-ambient-backdrop"></div>
+    <div class="modal-close-x" data-close-modal style="position: fixed; top: 20px; right: 24px; z-index: 250; background: rgba(50, 25, 12, 0.75); color: #f3ca7e; border: 1.5px solid #f3ca7e; border-radius: 50%;">✕</div>
+
+    <!-- NÚT ĐIỀU CHỈNH THU PHÓNG & VỊ TRÍ BỨC THƯ THEO Ý THÍCH -->
+    <div class="letter-zoom-bar" id="letter-zoom-bar">
+      <div class="letter-zoom-drag-handle" id="letter-zoom-drag-handle" title="Kéo thả thanh điều khiển">⋮⋮ Di chuyển</div>
+      <div class="letter-zoom-group">
+        <button id="btn-letter-zoom-in" class="letter-zoom-pill" title="Phóng to bức thư">🔍+ Phóng to</button>
+        <button id="btn-letter-zoom-out" class="letter-zoom-pill" title="Thu nhỏ bức thư">🔍- Thu nhỏ</button>
+        <button id="btn-letter-zoom-reset" class="letter-zoom-pill" title="Về 100%">100%</button>
+      </div>
+      <div class="letter-pos-group">
+        <button id="btn-letter-pos-up" class="letter-zoom-pill" title="Dời thư lên trên">⬆️</button>
+        <button id="btn-letter-pos-down" class="letter-zoom-pill" title="Dời thư xuống dưới">⬇️</button>
+        <button id="btn-letter-pos-left" class="letter-zoom-pill" title="Dời thư sang trái">⬅️</button>
+        <button id="btn-letter-pos-right" class="letter-zoom-pill" title="Dời thư sang phải">➡️</button>
+        <button id="btn-letter-pos-center" class="letter-zoom-pill" title="Căn giữa thư">🎯 Giữa</button>
+      </div>
+      <span id="letter-zoom-indicator" class="letter-zoom-indicator">100%</span>
+    </div>
+
+    <!-- Khung xem thư tĩnh, không lia cam gây chóng mặt -->
+    <div class="letter-static-container" id="letter-camera-rig">
+      <div class="letter-scroll-viewport" id="letter-scroll-viewport">
+        <div class="parchment-sheet" id="parchment-sheet" title="Có thể nhấn giữ chuột để kéo thả vị trí tờ thư theo ý thích">
+          <div class="letter-header-seal">
+            <span class="letter-seal-emoji">💌</span>
+            <div class="letter-seal-divider"></div>
+          </div>
+
+          <div class="letter-full-content" id="typewriter-text">
+            <!-- Toàn bộ thư tình của Quin được hiển thị đầy đủ ngay lập tức -->
+          </div>
+
+          <div id="letter-finish-prompt" class="letter-finish-prompt" style="display: block;">
+            <div class="letter-finish-text">
+              Vợ yêu đã đọc xong chưa á? Xong giòi hãy nhấp vào nút ở dưới nha ❤️
+            </div>
+            <div class="letter-finish-btn-group">
+              <button id="btn-back-to-bouquet" class="btn-secondary-flower">
+                <span>🌹 Ngắm lại bó hoa</span>
+              </button>
+              <button id="btn-finished-reading" class="btn-submit-ornate">
+                <img src="assets/ui/btn_submit_wide.png" alt="Button">
+                <span>Dạ đọc xong òi 🥰</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PHASE 3: TRANSITION & TOÀN MÀN HÌNH TRÁI TIM 3D ĐA NGÔN NGỮ
+       ======================================================== -->
+  <!-- Modal Sắp Sửa Hiện Lên -->
+  <div id="modal-transition-suspense" class="custom-modal-backdrop">
+    <div class="custom-modal-window transition-modal-window">
+      <div class="beating-heart-icon">💖</div>
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-warm); margin-bottom: 8px;">
+        SẮP SỬA CÓ GÌ ĐÓ HIỆN LÊN...
+      </h3>
+      <p style="font-size: 0.95rem; color: #fdf0d5;">
+        Vợ yêu hãy chuẩn bị tinh thần đón nhận điều kỳ diệu nhé!
+      </p>
+    </div>
+  </div>
+
+  <!-- Giao diện Toàn Màn Hình Phase 3 -->
+  <div id="phase3-fullscreen" class="phase3-fullscreen-container">
+    
+    <div style="text-align: center; margin-top: 8px;">
+      <span style="font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-warm); letter-spacing: 2px;">
+        👑 MÃI MÃI MỘT TÌNH YÊU 👑
+      </span>
+    </div>
+
+    <!-- Canvas Trái Tim 3D -->
+    <div class="heart-3d-canvas-wrap">
+      <canvas id="canvas-3d-heart"></canvas>
+      <div class="center-vn-love">Anh Yêu Em</div>
+    </div>
+
+    <!-- Dòng Chữ Quin Yêu MThư Lắm Áaaa -->
+    <div class="quin-love-statement">
+      "Quin Yêu MThu lắm áaaâ 20.10 thật hạnh phúc nha vọ oiiiii, Quin thương em lắm thích em vô cùng. Em hong có một mình đâu ạaaaa anh đây òiiiii" ❤️
+    </div>
+
+    <!-- Dải Ảnh Chạy Vô Tận (Infinite Marquee) -->
+    <div class="infinite-marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-card"><img src="assets/sprites/quin.png" alt="Quin"></div>
+        <div class="marquee-card"><img src="assets/ui/bouquet_reveal.png" alt="Bó hoa"></div>
+        <div class="marquee-card"><img src="assets/sprites/dog_happy.png" alt="Cún con"></div>
+        <div class="marquee-card"><img src="assets/sprites/teddy_empty.png" alt="Gấu bông"></div>
+        <div class="marquee-card"><img src="assets/objects/roses_vase.png" alt="Hoa hồng"></div>
+        <div class="marquee-card"><img src="assets/objects/milktea.png" alt="Trà sữa"></div>
+        <div class="marquee-card"><img src="assets/bg/bg_room1.png" alt="Kỷ niệm 1"></div>
+        <div class="marquee-card"><img src="assets/bg/bg_room2.png" alt="Kỷ niệm 2"></div>
+        <div class="marquee-card"><img src="assets/bg/bg_room3.png" alt="Kỷ niệm 3"></div>
+        <!-- Nhân đôi track để chạy vô tận không ngắt quãng -->
+        <div class="marquee-card"><img src="assets/sprites/quin.png" alt="Quin"></div>
+        <div class="marquee-card"><img src="assets/ui/bouquet_reveal.png" alt="Bó hoa"></div>
+        <div class="marquee-card"><img src="assets/sprites/dog_happy.png" alt="Cún con"></div>
+        <div class="marquee-card"><img src="assets/sprites/teddy_empty.png" alt="Gấu bông"></div>
+        <div class="marquee-card"><img src="assets/objects/roses_vase.png" alt="Hoa hồng"></div>
+        <div class="marquee-card"><img src="assets/objects/milktea.png" alt="Trà sữa"></div>
+        <div class="marquee-card"><img src="assets/bg/bg_room1.png" alt="Kỷ niệm 1"></div>
+        <div class="marquee-card"><img src="assets/bg/bg_room2.png" alt="Kỷ niệm 2"></div>
+        <div class="marquee-card"><img src="assets/bg/bg_room3.png" alt="Kỷ niệm 3"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPT BOOTSTRAP -->
+  <script type="module" src="scripts/app.js"></script>
+</body>
+</html>

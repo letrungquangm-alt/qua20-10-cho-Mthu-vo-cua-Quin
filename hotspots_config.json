@@ -1,0 +1,185 @@
+{
+  "savedAt": "20:25:29 20/10/2026",
+  "hotspots": {
+    "painting_couple": {
+      "left": "1.7%",
+      "top": "10.3%",
+      "width": "13.1%",
+      "height": "32.9%",
+      "label": "Quin & MThu",
+      "dialogue": "Bức tranh này có ảnh và em, phía sau có dòng số 27/09/2007 và 20/06/2006  có ý gì nhỉ? Sinh nhật của chúng ta? Chắc chắn là có ý gì đó!",
+      "dialogue_after": "à hoá ra nó là mật khẩu của hộp gỗ, vở giỏi dạaaaa",
+      "src": "assets/wall_frames/khung_1_ngoai_cung_trai/anh_2_om_guong_giu_nguyen_anh_goc.png"
+    },
+    "painting_frame2": {
+      "left": "15.1%",
+      "top": "6.8%",
+      "width": "9%",
+      "height": "20%",
+      "label": "anh và vợ chụp ở thang máy :3",
+      "dialogue": "Ảnh selfie trong thang máy của hai đứa mình nè vợ! Đáng yêu xỉu luôn á! ❤️",
+      "dialogue_after": "Ảnh selfie trong thang máy của hai đứa mình nè vợ! Đáng yêu xỉu luôn á! ❤️",
+      "src": "assets/wall_frames/khung_2_tren_trai/anh_3_selfie_thang_may_giu_nguyen_anh_goc.png"
+    },
+    "calendar": {
+      "left": "17.5%",
+      "top": "32.6%",
+      "width": "9%",
+      "height": "20%",
+      "label": "📅 Lịch",
+      "dialogue": "Lịch đã xé tới 20/10/2026, chúc vợ 20/10 vui vẻ ạaaa gửi tới Mẹ Ái và ngoại giúp anh lun nhaaaaa :3333",
+      "dialogue_after": "Lịch đã xé tới 20/10/2026, chúc vợ 20/10 vui vẻ ạaaa gửi tới Mẹ Ái và ngoại giúp anh lun nhaaaaa :3333",
+      "src": "assets/sprites/calendar_2709.jpg"
+    },
+    "painting_stars": {
+      "left": "32.8%",
+      "top": "15%",
+      "width": "8%",
+      "height": "16%",
+      "label": "⭐lúc call video",
+      "dialogue": "lúc này vợ xinh gái điên và anh cũng chụp lại ngôi sao may mắn của anh :3⭐",
+      "dialogue_after": "lúc này vợ xinh gái điên và anh cũng chụp lại ngôi sao may mắn của anh :3⭐",
+      "src": "assets/wall_frames/khung_3_giua_tren/anh_6_call_video_giu_nguyen_anh_goc.png"
+    },
+    "painting_gau": {
+      "left": "34.6%",
+      "top": "37.2%",
+      "width": "7.8%",
+      "height": "15.2%",
+      "label": "🐶 Chân Dung Bé Gấu",
+      "dialogue": "",
+      "dialogue_after": "tay vợ mềm nhắm á :3 cũng thơm nữaaaaaaaaaaa",
+      "src": "assets/wall_frames/khung_4_giua_duoi/anh_5_nam_tay_giu_nguyen_anh_goc.png"
+    },
+    "painting_clue": {
+      "left": "45.3%",
+      "top": "17.2%",
+      "width": "9.4%",
+      "height": "26.7%",
+      "label": "Gấu lúc bé",
+      "dialogue": "Gấu nó lúc bé dễ thương ghê ha vợ =))))))",
+      "dialogue_after": "Gấu nó lúc bé dễ thương ghê ha vợ =))))))",
+      "src": "assets/wall_frames/khung_5_tuong_phai/anh_1_cun_con_giu_nguyen_anh_goc.png"
+    },
+    "wooden_box": {
+      "left": "15.4%",
+      "top": "49.6%",
+      "width": "11.5%",
+      "height": "13.9%",
+      "label": "🔒 Hộp Gỗ (Mã 2726)",
+      "dialogue": "Hộp kỳ lạ có thể xoay số? Nó làm gì?",
+      "dialogue_after": "giỏi thía hộp này gặp anh chắc phải 3 ngày mới giải được cơ ^^",
+      "src": "assets/sprites/wooden_box_closed.png"
+    },
+    "dog": {
+      "left": "18.3%",
+      "top": "60.1%",
+      "width": "24.1%",
+      "height": "36.1%",
+      "label": "🐶 Bé Gấu (Cún Cưng)",
+      "dialogue": "Má, con gấu nó đang ngủ say đè trên chìa khoá kìa vợ, bấm vào người nó lần nữa để gọi nó dậy xem sao nhen",
+      "dialogue_after": "Khổ thân vợ tui, nó nặng như quỷ =)))))) giờ có ùi làm gì tiếp đây?",
+      "src": "assets/sprites/dog_happy.png"
+    },
+    "milktea": {
+      "left": "44.7%",
+      "top": "55.8%",
+      "width": "13%",
+      "height": "20%",
+      "label": "🧋 2 Ly Trà Sữa",
+      "dialogue": "Chà con mắm uống xong lại không dọn rồi, cực vợ nữa ùi :<",
+      "dialogue_after": "Chà con mắm uống xong lại không dọn rồi, cực vợ nữa ùi :<",
+      "src": "assets/sprites/milktea.png"
+    },
+    "roses_vase": {
+      "left": "77.7%",
+      "top": "41.4%",
+      "width": "18.6%",
+      "height": "55.3%",
+      "label": "🌹 Bình Hoa Hồng",
+      "dialogue": "Hoa này là hoa sinh nhật của em á, nhớ lại vui gheeeeeee",
+      "dialogue_after": "Hoa này là hoa sinh nhật của em á, nhớ lại vui gheeeeeee",
+      "src": "assets/sprites/roses_vase.png"
+    },
+    "teddy": {
+      "left": "21.8%",
+      "top": "63%",
+      "width": "17.5%",
+      "height": "35.1%",
+      "label": "🧸 Gấu Bông Nâu",
+      "dialogue": "Quin này nhìn hơi lạ =)))) nhưng hình như trong túi có gì đó, à thì ra là xương gậm cho Gấu nè",
+      "dialogue_after": "Túi áo của chú gấu bông nâu đã trống sau khi lấy xương gặm rồi 🧸",
+      "src": "assets/sprites/teddy_with_bone.png"
+    },
+    "safe": {
+      "left": "23.6%",
+      "top": "15.3%",
+      "width": "19.3%",
+      "height": "50.8%",
+      "label": "🔐 Két Sắt Bí Mật",
+      "dialogue": "Một cái két gì đó chỉ có thể ghi bằng chữ nhưng chữ gì ta?",
+      "dialogue_after": "Vợ giỏi cáaaaa vợ mở được ùi xem túi đồ có gì chưa, chắc nó mở gì á 🔐",
+      "src": "assets/objects/safe.png"
+    },
+    "jewelry_box": {
+      "left": "46%",
+      "top": "55.9%",
+      "width": "12%",
+      "height": "16%",
+      "label": "💎 Hộp Trang Sức",
+      "dialogue": "hiếm hoi lắm vợ mới mua đồ trang điểm cho bản thân nên anh cất ở đây :3",
+      "dialogue_after": "Hộp trang sức hoàng gia đã mở! Pin Trái Tim & Mảnh Tim (Trái) đã được cất vào túi đồ rùi áaaaaaaaaa! 💎",
+      "src": "assets/sprites/jewelry_box_closed.png"
+    },
+    "paper": {
+      "left": "71.9%",
+      "top": "61%",
+      "width": "10.9%",
+      "height": "15.8%",
+      "label": "💋 Tờ Giấy Nụ Hôn",
+      "dialogue": "Tờ giấy in dấu nụ hôn môi son đỏ thắm thật quyến rũ. Hãy thắp nến thơm ngoài ban công và hơ tờ giấy qua hơi nóng để làm hiện mật mã ẩn giấu nha!",
+      "dialogue_after": "Tờ giấy hiện rõ 5 chữ cái tình yêu: V - O - Y - E - U! Mật mã mở két sắt đó vợ ơi! 📄💋",
+      "src": "assets/sprites/paper_blank.png"
+    },
+    "dog_key": {
+      "left": "36.5%",
+      "top": "76%",
+      "width": "6.5%",
+      "height": "11%",
+      "label": "🔑 Chìa Khóa Đồng",
+      "dialogue": "Khổ thân vợ tui, nó nặng như quỷ =)))))) giờ có ùi làm gì tiếp đây?",
+      "dialogue_after": "Khổ thân vợ tui, nó nặng như quỷ =)))))) giờ có ùi làm gì tiếp đây?",
+      "src": "assets/items/small_key.png"
+    },
+    "candle": {
+      "left": "20.9%",
+      "top": "35.1%",
+      "width": "12%",
+      "height": "26%",
+      "label": "🕯️ Nến Thơm & Thiệp",
+      "dialogue": "Cây nến thơm chưa thắp lửa, bên dưới có tấm thiệp in mực cảm nhiệt.",
+      "dialogue_after": "Ngọn nến thơm ấm áp bùng sáng! Hơi nóng làm thiệp cảm nhiệt hiện rõ: 🌹 ➔ 👑 ➔ 💖 ➔ 💎",
+      "src": "assets/sprites/candle_lit.png"
+    },
+    "switch": {
+      "left": "0.4%",
+      "top": "72.5%",
+      "width": "9%",
+      "height": "13%",
+      "label": "💡 Nguồn Đèn Đom Đóm",
+      "dialogue": "Thiên lý ơi em có thể ở lại đây không =)))) cái này cần viên pin gì đó vợ thử tìm xem",
+      "dialogue_after": "Dây đèn đom đóm bừng sáng lung linh trên bầu trời đêm ban công! Đẹp quá vợ ơiiii ✨",
+      "src": "assets/sprites/switch_box.png"
+    },
+    "final_chest": {
+      "left": "55.2%",
+      "top": "27.4%",
+      "width": "19.5%",
+      "height": "21.6%",
+      "label": "🎁 Rương Báu 20/10",
+      "dialogue": "Rương này hơi lạ nó cần 2 mảnh trái tim và nhập mật khẩu, vợ thử tìm đâu đó xem",
+      "dialogue_after": "hehe vợ giỏi dạaaa xem hết thư i có thú vị lắm áaaa! 👑",
+      "src": "assets/sprites/chest_closed.png"
+    }
+  }
+}

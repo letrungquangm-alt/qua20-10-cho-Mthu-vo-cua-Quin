@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <radialGradient id="bearBodyGradE" cx="40%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#a06c4b"/>
+      <stop offset="60%" stop-color="#7f4f24"/>
+      <stop offset="100%" stop-color="#582f0e"/>
+    </radialGradient>
+    <radialGradient id="bearLightGradE" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ddb892"/>
+      <stop offset="100%" stop-color="#b08968"/>
+    </radialGradient>
+    <linearGradient id="pinkRibbonE" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff99c8"/>
+      <stop offset="50%" stop-color="#ff758c"/>
+      <stop offset="100%" stop-color="#c9184a"/>
+    </linearGradient>
+    <filter id="bearShadowE" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="250" cy="465" rx="180" ry="22" fill="rgba(0,0,0,0.3)"/>
+
+  <g id="teddy_bear" filter="url(#bearShadowE)">
+    <!-- Ears -->
+    <circle cx="160" cy="135" r="42" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="5"/>
+    <circle cx="165" cy="138" r="24" fill="url(#bearLightGradE)"/>
+    <!-- Left Ear Ribbon Bow (Bow 1) -->
+    <g transform="translate(145, 110) rotate(-20)">
+      <path d="M 0 0 C -22 -16, -26 14, 0 4 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="2"/>
+      <path d="M 0 0 C 22 -16, 26 14, 0 4 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="2"/>
+      <circle cx="0" cy="2" r="5" fill="#ffe6a7"/>
+    </g>
+
+    <!-- Right Ear -->
+    <circle cx="340" cy="135" r="42" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="5"/>
+    <circle cx="335" cy="138" r="24" fill="url(#bearLightGradE)"/>
+    <!-- Right Ear Ribbon Bow (Bow 2) -->
+    <g transform="translate(355, 110) rotate(20)">
+      <path d="M 0 0 C -22 -16, -26 14, 0 4 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="2"/>
+      <path d="M 0 0 C 22 -16, 26 14, 0 4 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="2"/>
+      <circle cx="0" cy="2" r="5" fill="#ffe6a7"/>
+    </g>
+
+    <!-- Body -->
+    <ellipse cx="250" cy="330" rx="110" ry="120" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="6"/>
+
+    <!-- Hind Feet / Paws -->
+    <ellipse cx="150" cy="425" rx="50" ry="38" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="5"/>
+    <ellipse cx="150" cy="422" rx="32" ry="24" fill="url(#bearLightGradE)"/>
+    <circle cx="140" cy="410" r="6" fill="#7f4f24"/>
+    <circle cx="155" cy="406" r="6" fill="#7f4f24"/>
+    <circle cx="168" cy="412" r="6" fill="#7f4f24"/>
+
+    <ellipse cx="350" cy="425" rx="50" ry="38" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="5"/>
+    <ellipse cx="350" cy="422" rx="32" ry="24" fill="url(#bearLightGradE)"/>
+    <circle cx="332" cy="412" r="6" fill="#7f4f24"/>
+    <circle cx="345" cy="406" r="6" fill="#7f4f24"/>
+    <circle cx="360" cy="410" r="6" fill="#7f4f24"/>
+
+    <!-- Front Arms / Paws -->
+    <ellipse cx="155" cy="310" rx="38" ry="60" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="5" transform="rotate(25 155 310)"/>
+    <ellipse cx="345" cy="310" rx="38" ry="60" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="5" transform="rotate(-25 345 310)"/>
+
+    <!-- Front Pocket on Tummy (EMPTY!) -->
+    <!-- Pocket dark opening interior -->
+    <path d="M 195 315 Q 250 330 305 315 Q 250 340 195 315 Z" fill="#582f0e"/>
+    <path d="M 195 315 Q 250 330 305 315 L 295 385 Q 250 405 205 385 Z" fill="#eddcd2" stroke="#7f4f24" stroke-width="4"/>
+    <!-- Stitching details -->
+    <path d="M 200 325 Q 250 338 300 325 L 290 380 Q 250 398 210 380 Z" fill="none" stroke="#7f4f24" stroke-width="2" stroke-dasharray="5,4"/>
+
+    <!-- Head -->
+    <circle cx="250" cy="200" r="95" fill="url(#bearBodyGradE)" stroke="#3e1f07" stroke-width="6"/>
+
+    <!-- Snout / Muzzle -->
+    <ellipse cx="250" cy="225" rx="44" ry="32" fill="url(#bearLightGradE)" stroke="#3e1f07" stroke-width="3"/>
+    <path d="M 235 210 C 235 202, 265 202, 265 210 C 265 222, 235 222, 235 210 Z" fill="#3e1f07"/>
+    <ellipse cx="244" cy="208" rx="3" ry="1.5" fill="#fff" opacity="0.8"/>
+    <!-- Winking smile -->
+    <path d="M 250 220 L 250 232 Q 238 240 234 235 M 250 232 Q 262 240 266 235" stroke="#3e1f07" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Joyful Eyes -->
+    <ellipse cx="205" cy="180" rx="14" ry="18" fill="#1b120c"/>
+    <circle cx="200" cy="172" r="5" fill="#fff"/>
+    <circle cx="209" cy="186" r="2.5" fill="#fff"/>
+
+    <ellipse cx="295" cy="180" rx="14" ry="18" fill="#1b120c"/>
+    <circle cx="290" cy="172" r="5" fill="#fff"/>
+    <circle cx="299" cy="186" r="2.5" fill="#fff"/>
+
+    <!-- Rosy Cheeks -->
+    <ellipse cx="178" cy="215" rx="16" ry="10" fill="#ff758c" opacity="0.6"/>
+    <ellipse cx="322" cy="215" rx="16" ry="10" fill="#ff758c" opacity="0.6"/>
+
+    <!-- Neck Ribbon Bow (Bow 3) -->
+    <g transform="translate(250, 268)">
+      <path d="M 0 0 C -45 -30, -50 25, 0 8 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="3"/>
+      <path d="M 0 0 C 45 -30, 50 25, 0 8 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="3"/>
+      <path d="M -8 6 L -25 45 L -10 40 L 0 45 L -4 10 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="2"/>
+      <path d="M 8 6 L 25 45 L 10 40 L 0 45 L 4 10 Z" fill="url(#pinkRibbonE)" stroke="#800f2f" stroke-width="2"/>
+      <circle cx="0" cy="4" r="9" fill="#ffe6a7" stroke="#b08968" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

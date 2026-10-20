@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="boneItemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#faedcd"/>
+      <stop offset="100%" stop-color="#d4a373"/>
+    </linearGradient>
+    <filter id="boneItemShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(100, 100) rotate(-25)" filter="url(#boneItemShadow)">
+    <!-- Bone Ends Left -->
+    <circle cx="-50" cy="-18" r="22" fill="url(#boneItemGrad)" stroke="#7f4f24" stroke-width="5"/>
+    <circle cx="-50" cy="18" r="22" fill="url(#boneItemGrad)" stroke="#7f4f24" stroke-width="5"/>
+
+    <!-- Bone Ends Right -->
+    <circle cx="50" cy="-18" r="22" fill="url(#boneItemGrad)" stroke="#7f4f24" stroke-width="5"/>
+    <circle cx="50" cy="18" r="22" fill="url(#boneItemGrad)" stroke="#7f4f24" stroke-width="5"/>
+
+    <!-- Bone Shaft -->
+    <rect x="-42" y="-18" width="84" height="36" rx="8" fill="url(#boneItemGrad)" stroke="#7f4f24" stroke-width="5"/>
+
+    <!-- Cute Pink Ribbon Bow in Center -->
+    <g transform="translate(0, 0)">
+      <path d="M 0 0 C -22 -18, -25 15, 0 4 Z" fill="#ff758c" stroke="#c9184a" stroke-width="2.5"/>
+      <path d="M 0 0 C 22 -18, 25 15, 0 4 Z" fill="#ff758c" stroke="#c9184a" stroke-width="2.5"/>
+      <circle cx="0" cy="2" r="6" fill="#ffe6a7" stroke="#7f4f24" stroke-width="1.5"/>
+    </g>
+
+    <!-- Sparkles -->
+    <path d="M -20 -30 L -16 -24 L -10 -20 L -16 -16 L -20 -10 L -24 -16 L -30 -20 L -24 -24 Z" fill="#fff" opacity="0.9"/>
+  </g>
+</svg>

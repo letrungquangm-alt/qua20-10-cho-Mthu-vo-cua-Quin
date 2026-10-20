@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Cushion Gradient -->
+    <linearGradient id="cushionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff758c"/>
+      <stop offset="50%" stop-color="#c9184a"/>
+      <stop offset="100%" stop-color="#800f2f"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe6a7"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#996515"/>
+    </linearGradient>
+    <radialGradient id="pupilGlow" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#4a3f35"/>
+      <stop offset="100%" stop-color="#1a1110"/>
+    </radialGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="250" cy="460" rx="190" ry="25" fill="rgba(0,0,0,0.3)"/>
+
+  <!-- Velvet Cushion -->
+  <g id="cushion" filter="url(#shadow)">
+    <!-- Base cushion body -->
+    <path d="M 70 410 C 70 370, 160 360, 250 360 C 340 360, 430 370, 430 410 C 430 450, 340 455, 250 455 C 160 455, 70 450, 70 410 Z" fill="url(#cushionGrad)" stroke="#590d22" stroke-width="4"/>
+    <!-- Gold rope fringe -->
+    <path d="M 80 425 Q 165 440 250 440 Q 335 440 420 425" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-dasharray="8,4"/>
+    <!-- Corner Tassels -->
+    <g fill="url(#goldGrad)">
+      <circle cx="85" cy="425" r="7"/>
+      <path d="M 85 432 L 75 455 L 95 455 Z"/>
+      <circle cx="415" cy="425" r="7"/>
+      <path d="M 415 432 L 405 455 L 425 455 Z"/>
+    </g>
+  </g>
+
+  <!-- Black Puppy Girl (Tai Cụp / Floppy Ears) -->
+  <g id="puppy" filter="url(#shadow)">
+    <!-- Tail (wagging back) -->
+    <path d="M 170 360 Q 140 340 145 300 Q 165 310 180 340" fill="#211f24" stroke="#121014" stroke-width="4"/>
+
+    <!-- Body -->
+    <ellipse cx="250" cy="310" rx="85" ry="90" fill="#2b2830" stroke="#141217" stroke-width="5"/>
+    <!-- Chest fluff (white-cream spot) -->
+    <path d="M 230 270 Q 250 310 235 340 Q 250 325 265 340 Q 255 310 270 270 Z" fill="#fdf0d5" opacity="0.9"/>
+
+    <!-- Hind Paws -->
+    <ellipse cx="180" cy="385" rx="32" ry="24" fill="#211f24" stroke="#141217" stroke-width="4"/>
+    <ellipse cx="320" cy="385" rx="32" ry="24" fill="#211f24" stroke="#141217" stroke-width="4"/>
+
+    <!-- Left Front Paw -->
+    <ellipse cx="215" cy="375" rx="26" ry="22" fill="#2b2830" stroke="#141217" stroke-width="4"/>
+
+    <!-- Head -->
+    <circle cx="250" cy="195" r="85" fill="#2b2830" stroke="#141217" stroke-width="5"/>
+
+    <!-- Floppy Ears (Tai cụp rủ xuống 2 bên mặt) -->
+    <!-- Left Floppy Ear -->
+    <path d="M 185 145 C 130 150, 120 230, 150 270 C 175 275, 195 230, 190 170 Z" fill="#1b1820" stroke="#141217" stroke-width="5"/>
+    <path d="M 160 175 C 145 200, 145 240, 160 255" stroke="#ffb4a2" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Right Floppy Ear -->
+    <path d="M 315 145 C 370 150, 380 230, 350 270 C 325 275, 305 230, 310 170 Z" fill="#1b1820" stroke="#141217" stroke-width="5"/>
+    <path d="M 340 175 C 355 200, 355 240, 340 255" stroke="#ffb4a2" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Eyes (Big Cute Anime/Gumball Eyes) -->
+    <!-- Left Eye -->
+    <ellipse cx="210" cy="190" rx="22" ry="28" fill="#151214"/>
+    <circle cx="204" cy="178" r="9" fill="#ffffff"/>
+    <circle cx="218" cy="198" r="4.5" fill="#ffffff"/>
+    <!-- Cute Girl Eyelashes -->
+    <path d="M 195 168 Q 190 158 185 162" stroke="#141217" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M 205 164 Q 202 152 200 154" stroke="#141217" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Right Eye -->
+    <ellipse cx="290" cy="190" rx="22" ry="28" fill="#151214"/>
+    <circle cx="284" cy="178" r="9" fill="#ffffff"/>
+    <circle cx="298" cy="198" r="4.5" fill="#ffffff"/>
+    <path d="M 305 168 Q 310 158 315 162" stroke="#141217" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M 295 164 Q 298 152 300 154" stroke="#141217" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Cute Snout & Nose -->
+    <ellipse cx="250" cy="225" rx="30" ry="20" fill="#fdf0d5"/>
+    <path d="M 240 215 C 240 210, 260 210, 260 215 C 260 225, 240 225, 240 215 Z" fill="#3a2e2d"/>
+    <circle cx="246" cy="214" r="2" fill="#ffffff"/>
+    <path d="M 250 222 L 250 230 Q 242 236 238 232 M 250 230 Q 258 236 262 232" stroke="#3a2e2d" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Rosy Cheeks -->
+    <ellipse cx="180" cy="222" rx="12" ry="7" fill="#ff758c" opacity="0.6"/>
+    <ellipse cx="320" cy="222" rx="12" ry="7" fill="#ff758c" opacity="0.6"/>
+
+    <!-- Pink Collar with Gold Bell -->
+    <path d="M 200 262 Q 250 278 300 262" stroke="#ff758c" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <circle cx="250" cy="274" r="9" fill="url(#goldGrad)" stroke="#744210" stroke-width="2"/>
+    <circle cx="250" cy="276" r="2.5" fill="#3a2e2d"/>
+
+    <!-- Head Bow Ribbon (Female dog touch) -->
+    <g transform="translate(190, 115) rotate(-15)">
+      <path d="M 0 0 C -25 -20, -30 15, 0 5 Z" fill="#ff758c" stroke="#c9184a" stroke-width="2"/>
+      <path d="M 0 0 C 25 -20, 30 15, 0 5 Z" fill="#ff758c" stroke="#c9184a" stroke-width="2"/>
+      <circle cx="0" cy="2" r="6" fill="#ffd166"/>
+    </g>
+
+    <!-- Right Front Paw resting on the Antique Key -->
+    <ellipse cx="280" cy="365" rx="26" ry="22" fill="#2b2830" stroke="#141217" stroke-width="4"/>
+  </g>
+
+  <!-- Antique Brass Key Guarded Under Right Paw -->
+  <g id="brass_key" transform="translate(265, 365) rotate(20)" filter="url(#shadow)">
+    <!-- Key Bow -->
+    <circle cx="0" cy="0" r="18" fill="url(#goldGrad)" stroke="#5c3d11" stroke-width="3"/>
+    <circle cx="0" cy="0" r="9" fill="#2b2830"/>
+    <circle cx="0" cy="-6" r="3" fill="url(#goldGrad)"/>
+    <!-- Shaft -->
+    <rect x="-4" y="16" width="8" height="60" fill="url(#goldGrad)" stroke="#5c3d11" stroke-width="3"/>
+    <!-- Bit -->
+    <path d="M 4 58 L 18 58 L 18 66 L 10 66 L 10 72 L 18 72 L 18 76 L 4 76 Z" fill="url(#goldGrad)" stroke="#5c3d11" stroke-width="2"/>
+    <!-- Sparkles -->
+    <path d="M 22 25 L 26 21 L 30 25 L 26 29 Z" fill="#fff" opacity="0.9"/>
+  </g>
+</svg>

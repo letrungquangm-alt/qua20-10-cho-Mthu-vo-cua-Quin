@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Công cụ Xóa Đệm Hồng Phòng Khách (bg_room1.png)</title>
+  <style>
+    body { background: #1a0f14; color: #fce4ec; font-family: sans-serif; text-align: center; padding: 24px; }
+    .box { max-width: 760px; margin: 0 auto; background: #2b1822; padding: 24px; border-radius: 16px; border: 1px solid #f6d365; }
+    canvas { max-width: 100%; border-radius: 8px; margin-top: 16px; border: 2px solid #f6d365; }
+    .btn { background: linear-gradient(135deg, #ff758c, #c9184a); color: #fff; border: 1px solid #f6d365; padding: 10px 22px; border-radius: 99px; cursor: pointer; font-weight: bold; margin: 8px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>✨ Tự Động Xóa Đệm Hồng & Tái Tạo Thảm Kem (bg_room1.png)</h2>
+    <p>Chọn file <b>001_Generate...jpg</b> hoặc <b>bg_room1.png</b> của bạn:</p>
+    <input type="file" id="upload" accept="image/*" class="btn">
+    <button id="downloadBtn" class="btn" style="display:none;">💾 Tải bg_room1.png Đã Xóa Đệm</button>
+    <br>
+    <canvas id="canvas" width="510" height="286"></canvas>
+  </div>
+
+  <script>
+    const upload = document.getElementById('upload');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    upload.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const img = new Image();
+      img.onload = () => {
+        // Nếu tải ảnh ghép 001 (1024x576), chỉ cắt góc trên bên trái (510x286)
+        ctx.drawImage(img, 0, 0, 510, 286, 0, 0, 510, 286);
+        cleanCushion();
+        downloadBtn.style.display = 'inline-block';
+      };
+      img.src = URL.createObjectURL(file);
+    });
+
+    function cleanCushion() {
+      // 1. Phục hồi sàn gỗ phía sau đệm (góc dưới tủ TV)
+      const woodGrad = ctx.createLinearGradient(80, 200, 210, 240);
+      woodGrad.addColorStop(0, '#c88763');
+      woodGrad.addColorStop(1, '#d59773');
+      ctx.fillStyle = woodGrad;
+      ctx.beginPath();
+      ctx.moveTo(75, 242);
+      ctx.lineTo(195, 202);
+      ctx.lineTo(255, 212);
+      ctx.lineTo(110, 255);
+      ctx.closePath();
+      ctx.fill();
+
+      // Kẻ lại đường ván sàn gỗ tự nhiên
+      ctx.strokeStyle = 'rgba(135, 78, 48, 0.45)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(65, 232); ctx.lineTo(188, 198);
+      ctx.moveTo(75, 244); ctx.lineTo(202, 204);
+      ctx.stroke();
+
+      // 2. Vẽ lại thảm lông màu kem phẳng phiu đè lên vùng đệm hồng
+      const rugGrad = ctx.createLinearGradient(80, 210, 260, 285);
+      rugGrad.addColorStop(0, '#f3d1be');
+      rugGrad.addColorStop(0.5, '#f5d6c5');
+      rugGrad.addColorStop(1, '#eac0ab');
+      ctx.fillStyle = rugGrad;
+      ctx.beginPath();
+      ctx.moveTo(58, 252);
+      ctx.lineTo(196, 206);
+      ctx.lineTo(280, 222);
+      ctx.lineTo(265, 285);
+      ctx.lineTo(115, 285);
+      ctx.closePath();
+      ctx.fill();
+
+      // Viền mép thảm kem bên trái
+      ctx.strokeStyle = '#d9a78e';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(58, 252);
+      ctx.lineTo(196, 206);
+      ctx.stroke();
+
+      // 3. Vẽ bóng đổ мяг dưới gầm bàn trà
+      const shadowGrad = ctx.createRadialGradient(245, 248, 5, 245, 248, 65);
+      shadowGrad.addColorStop(0, 'rgba(168, 108, 84, 0.42)');
+      shadowGrad.addColorStop(1, 'rgba(243, 209, 190, 0)');
+      ctx.fillStyle = shadowGrad;
+      ctx.fillRect(175, 210, 120, 72);
+
+      // 4. Vẽ lại chân bàn trà bên trái bị đệm che một phần
+      ctx.fillStyle = '#b56e45';
+      ctx.strokeStyle = '#6e391c';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.rect(200, 209, 11, 47);
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = 'bg_room1.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>
