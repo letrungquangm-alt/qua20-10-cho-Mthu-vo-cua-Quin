@@ -2301,49 +2301,32 @@ body.calibrator-active .hotspot-label {
   flex-direction: column;
 }
 
-.inspect-card-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: rgba(43, 24, 16, 0.85);
-  border: 1px solid var(--brown-toffee);
-  padding: 8px 14px;
-  border-radius: 12px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-
-.btn-zoom {
-  padding: 6px 14px;
-  font-size: 0.85rem;
+/* INLINE FEEDBACK TRONG TỪNG MODAL GIẢI ĐỐ */
+.modal-inline-feedback {
+  min-height: 22px;
+  margin-top: 12px;
+  font-size: 0.88rem;
   font-weight: 600;
-  border-radius: 8px;
-  background: #3e2213;
-  color: var(--cream-soft);
-  border: 1px solid var(--brown-toffee);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-zoom:hover {
-  background: var(--gold-warm);
-  color: #2b170c;
-  transform: translateY(-1px);
-}
-
-.zoom-level-text {
-  font-weight: 700;
-  color: var(--gold-warm);
-  font-size: 0.95rem;
-  min-width: 50px;
   text-align: center;
+  color: #ffb703;
+  line-height: 1.45;
+  transition: all 0.25s ease;
+}
+
+.modal-inline-feedback.shake {
+  animation: modalShake 0.45s ease-in-out;
+}
+
+@keyframes modalShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
 }
 
 .inspect-card-viewport {
   width: 100%;
   min-height: 240px;
-  max-height: 55vh;
+  max-height: 60vh;
   overflow: auto;
   display: flex;
   justify-content: center;
@@ -2352,7 +2335,7 @@ body.calibrator-active .hotspot-label {
   border-radius: 12px;
   padding: 0;
   border: none;
-  cursor: grab;
+  cursor: default;
 }
 
 .inspect-card-sheet {
@@ -2458,79 +2441,7 @@ body.calibrator-active .hotspot-label {
   color: #c9184a;
 }
 
-.card-customizer-form {
-  background: rgba(26, 14, 9, 0.95);
-  border: 1px solid var(--gold-warm);
-  border-radius: 12px;
-  padding: 14px;
-  margin-top: 10px;
-}
 
-/* THANH THU PHÓNG & ĐIỀU CHỈNH VỊ TRÍ BỨC THƯ TÌNH (PHASE 2) */
-.letter-zoom-bar {
-  position: fixed;
-  top: 18px;
-  left: 20px;
-  z-index: 250;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  background: rgba(26, 14, 8, 0.92);
-  border: 1.5px solid var(--gold-warm);
-  border-radius: 12px;
-  padding: 6px 12px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  user-select: none;
-}
-
-.letter-zoom-drag-handle {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #d4a373;
-  cursor: grab;
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  letter-spacing: 1px;
-}
-
-.letter-zoom-drag-handle:active {
-  cursor: grabbing;
-}
-
-.letter-zoom-group,
-.letter-pos-group {
-  display: flex;
-  gap: 5px;
-}
-
-.letter-zoom-pill {
-  background: rgba(60, 30, 15, 0.9);
-  color: var(--gold-warm);
-  border: 1px solid var(--gold-warm);
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  transition: transform 0.15s, background 0.15s;
-}
-
-.letter-zoom-pill:hover {
-  background: var(--gold-warm);
-  color: #2b170c;
-  transform: translateY(-1px);
-}
-
-.letter-zoom-indicator {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #faedcd;
-  margin-left: 4px;
-}
 
 /* BÉ GẤU: LÚC NGỒI DẬY TO HƠN XỈU */
 #sprite-dog.dog-sitting {

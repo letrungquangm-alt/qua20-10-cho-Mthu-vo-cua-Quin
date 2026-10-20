@@ -39,7 +39,6 @@
       <button id="btn-next-room" class="game-btn btn-secondary btn-nav-arrow" title="Sang phòng kế">▶</button>
       <button id="btn-husband-hint" class="game-btn btn-hint-pill">💡 Gợi Ý Của Quin</button>
       <button id="btn-open-wall-gallery" class="game-btn btn-gallery-pill" title="Mở bộ sưu tập và đổi ảnh cho 5 khung tranh tường">🖼️ Tranh Treo Tường</button>
-      <button id="btn-toggle-calibrator" class="game-btn btn-calibrator-pill" title="Kéo thả trực quan và lưu tọa độ cho cả 3 phòng">🎯 Căn Chỉnh Vị Trí</button>
     </div>
   </header>
 
@@ -263,6 +262,7 @@
           </button>
           <button class="game-btn btn-secondary" data-close-modal>Đóng</button>
         </div>
+        <div id="wood-feedback" class="modal-inline-feedback"></div>
       </div>
     </div>
   </div>
@@ -300,6 +300,7 @@
           </button>
           <button class="game-btn btn-secondary" data-close-modal>Đóng</button>
         </div>
+        <div id="jewelry-feedback" class="modal-inline-feedback"></div>
       </div>
     </div>
   </div>
@@ -361,6 +362,7 @@
           <button class="keypad-key btn-clear" data-safe-key="CLEAR" title="Xóa ký tự">XÓA</button>
           <button class="keypad-key btn-enter" data-safe-key="ENTER" title="Xác nhận gửi">GỬI</button>
         </div>
+        <div id="safe-feedback" class="modal-inline-feedback"></div>
       </div>
     </div>
   </div>
@@ -430,6 +432,7 @@
           </button>
           <button class="game-btn btn-secondary" data-close-modal>Đóng</button>
         </div>
+        <div id="chest-feedback" class="modal-inline-feedback"></div>
       </div>
     </div>
   </div>
@@ -467,17 +470,7 @@
         </p>
       </div>
 
-      <!-- THANH ĐIỀU KHIỂN PHÓNG TO / THU NHỎ THEO Ý THÍCH -->
-      <div class="inspect-card-toolbar">
-        <span class="toolbar-label" style="font-weight: 600; color: #fdf0d5; font-size: 0.88rem;">🔍 Phóng to/Thu nhỏ:</span>
-        <button id="btn-zoom-card-in" class="game-btn btn-zoom" title="Phóng to thiệp">🔍+ Phóng To</button>
-        <button id="btn-zoom-card-out" class="game-btn btn-zoom" title="Thu nhỏ thiệp">🔍- Thu Nhỏ</button>
-        <button id="btn-zoom-card-reset" class="game-btn btn-zoom" title="Về 100%">⟲ 100%</button>
-        <span id="zoom-card-level" class="zoom-level-text">100%</span>
-        <button id="btn-edit-card-content" class="game-btn btn-edit-pill" style="margin-left: auto; background: #6f3b1e; border: 1px solid var(--gold-warm); font-size: 0.85rem;" title="Chỉnh sửa nội dung thiệp theo ý thích">✏️ Chỉnh Sửa Thiệp</button>
-      </div>
-
-      <!-- KHUNG HIỂN THỊ TỜ THIỆP CÓ THỂ CUỘN VÀ PHÓNG TO (VỪA KHÍT KHUNG MODAL) -->
+      <!-- KHUNG HIỂN THỊ TỜ THIỆP CẢM NHIỆT (VỪA VẶN THANH LỊCH) -->
       <div class="inspect-card-viewport" id="inspect-card-viewport">
         <div class="inspect-card-sheet" id="inspect-card-sheet">
           <div class="card-message" id="inspect-card-message">
@@ -498,23 +491,6 @@
               <div class="thermal-symbol-card"><span class="sym-icon">💎</span><span class="sym-name">Kim Cương</span></div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- FORM CHỈNH SỬA THIỆP THEO Ý THÍCH (ẨN / HIỆN) -->
-      <div id="card-customizer-form" class="card-customizer-form" style="display: none;">
-        <div style="font-weight: 700; color: var(--gold-warm); margin-bottom: 8px;">✏️ Chỉnh sửa nội dung Tờ Thiệp theo ý thích:</div>
-        <div style="margin-bottom: 8px;">
-          <label style="font-size: 0.85rem; color: #fdf0d5;">Lời nhắn trên thiệp:</label>
-          <textarea id="card-inp-msg" rows="2" class="cal-textarea" style="width: 100%; margin-top: 4px;"></textarea>
-        </div>
-        <div style="margin-bottom: 8px;">
-          <label style="font-size: 0.85rem; color: #fdf0d5;">Chữ ký cuối thiệp:</label>
-          <input type="text" id="card-inp-sign" class="cal-text-input" style="width: 100%; margin-top: 4px;">
-        </div>
-        <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px;">
-          <button id="btn-save-card-custom" class="cal-btn-save" style="padding: 6px 16px;">💾 Lưu Nội Dung Thiệp</button>
-          <button id="btn-cancel-card-custom" class="game-btn btn-secondary" style="padding: 6px 14px;">Hủy</button>
         </div>
       </div>
 
@@ -569,28 +545,10 @@
     <div class="letter-ambient-backdrop"></div>
     <div class="modal-close-x" data-close-modal style="position: fixed; top: 20px; right: 24px; z-index: 250; background: rgba(50, 25, 12, 0.75); color: #f3ca7e; border: 1.5px solid #f3ca7e; border-radius: 50%;">✕</div>
 
-    <!-- NÚT ĐIỀU CHỈNH THU PHÓNG & VỊ TRÍ BỨC THƯ THEO Ý THÍCH -->
-    <div class="letter-zoom-bar" id="letter-zoom-bar">
-      <div class="letter-zoom-drag-handle" id="letter-zoom-drag-handle" title="Kéo thả thanh điều khiển">⋮⋮ Di chuyển</div>
-      <div class="letter-zoom-group">
-        <button id="btn-letter-zoom-in" class="letter-zoom-pill" title="Phóng to bức thư">🔍+ Phóng to</button>
-        <button id="btn-letter-zoom-out" class="letter-zoom-pill" title="Thu nhỏ bức thư">🔍- Thu nhỏ</button>
-        <button id="btn-letter-zoom-reset" class="letter-zoom-pill" title="Về 100%">100%</button>
-      </div>
-      <div class="letter-pos-group">
-        <button id="btn-letter-pos-up" class="letter-zoom-pill" title="Dời thư lên trên">⬆️</button>
-        <button id="btn-letter-pos-down" class="letter-zoom-pill" title="Dời thư xuống dưới">⬇️</button>
-        <button id="btn-letter-pos-left" class="letter-zoom-pill" title="Dời thư sang trái">⬅️</button>
-        <button id="btn-letter-pos-right" class="letter-zoom-pill" title="Dời thư sang phải">➡️</button>
-        <button id="btn-letter-pos-center" class="letter-zoom-pill" title="Căn giữa thư">🎯 Giữa</button>
-      </div>
-      <span id="letter-zoom-indicator" class="letter-zoom-indicator">100%</span>
-    </div>
-
-    <!-- Khung xem thư tĩnh, không lia cam gây chóng mặt -->
+    <!-- Khung xem thư tĩnh, nguyên bản trên nền letter_paper.png -->
     <div class="letter-static-container" id="letter-camera-rig">
       <div class="letter-scroll-viewport" id="letter-scroll-viewport">
-        <div class="parchment-sheet" id="parchment-sheet" title="Có thể nhấn giữ chuột để kéo thả vị trí tờ thư theo ý thích">
+        <div class="parchment-sheet" id="parchment-sheet">
           <div class="letter-header-seal">
             <span class="letter-seal-emoji">💌</span>
             <div class="letter-seal-divider"></div>

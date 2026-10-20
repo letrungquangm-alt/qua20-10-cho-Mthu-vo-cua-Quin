@@ -1,11 +1,9 @@
 import init, { GameEngine } from '../pkg/love_mystery_2010_engine.js';
 import { SoundController } from './audio.js';
-import { HotspotCalibrator } from './calibrator.js';
 import { WallGalleryManager } from './wall_gallery.js';
 import { initFlowersBloom, startFlowersBloom } from './flowers_bloom.js';
 
 let engine = null;
-let calibrator = null;
 let wallGallery = null;
 const sound = new SoundController();
 let dogKeyCollected = false;
@@ -60,16 +58,11 @@ async function bootstrapGame() {
   bindNavigation();
   bindHotspots();
   bindModalControls();
-  bindInspectCardControls();
-  bindLoveLetterZoomControls();
   createFallingPetals(25);
   initFlowersBloom();
   renderInventory();
   updateRoomView(1);
   updateSceneSprites();
-
-  // Khởi tạo bộ căn chỉnh tọa độ kéo thả trực quan
-  calibrator = new HotspotCalibrator();
 
   // Khởi tạo bộ sưu tập tranh treo tường tất cả các hướng
   wallGallery = new WallGalleryManager(sound);
@@ -232,7 +225,6 @@ function bindHotspots() {
   const calEl = document.getElementById('flipping-calendar');
   if (calHotspot && calEl) {
     calHotspot.addEventListener('click', () => {
-      if (document.body.classList.contains('calibrator-active')) return;
       calEl.classList.toggle('flipped');
       sound.play('click');
       const isFlipped = calEl.classList.contains('flipped');
@@ -245,7 +237,6 @@ function bindHotspots() {
 
   document.querySelectorAll('.hotspot[data-hotspot]').forEach(el => {
     el.addEventListener('click', () => {
-      if (document.body.classList.contains('calibrator-active')) return;
       const target = el.getAttribute('data-hotspot');
 
       // Bỏ qua nếu là click vào lịch (đã có handler riêng)
@@ -676,7 +667,9 @@ function bindModalControls() {
     btnSubmitWood.addEventListener('click', () => {
       const res = engine.verify_wooden_box(woodenDials[0], woodenDials[1], woodenDials[2], woodenDials[3]);
       sound.play(res.sound_effect);
+      const feedbackEl = document.getElementById('wood-feedback');
       if (res.success) {
+        if (feedbackEl) feedbackEl.innerHTML = '';
         const afterDlg = document.querySelector('[data-hotspot="wooden_box"]')?.getAttribute('data-dialogue-after');
         showDialogue(afterDlg || res.message);
         closeAllModals();
@@ -684,6 +677,12 @@ function bindModalControls() {
         updateSceneSprites();
       } else {
         showDialogue(res.message);
+        if (feedbackEl) {
+          feedbackEl.innerHTML = `⚠️ <b>${res.message}</b><br><span style="font-size:0.83rem;color:#f3ca7e;">Gợi ý: Ngày sinh vợ (27) ghép năm sinh anh (26) ➔ 2 7 2 6</span>`;
+          feedbackEl.classList.remove('shake');
+          void feedbackEl.offsetWidth;
+          feedbackEl.classList.add('shake');
+        }
       }
     });
   }
@@ -708,7 +707,9 @@ function bindModalControls() {
     btnSubmitJewelry.addEventListener('click', () => {
       const res = engine.verify_jewelry_box(jewelrySymbols[0], jewelrySymbols[1], jewelrySymbols[2], jewelrySymbols[3]);
       sound.play(res.sound_effect);
+      const feedbackEl = document.getElementById('jewelry-feedback');
       if (res.success) {
+        if (feedbackEl) feedbackEl.innerHTML = '';
         const afterDlg = document.querySelector('[data-hotspot="jewelry_box"]')?.getAttribute('data-dialogue-after');
         showDialogue(afterDlg || res.message);
         closeAllModals();
@@ -716,6 +717,12 @@ function bindModalControls() {
         updateSceneSprites();
       } else {
         showDialogue(res.message);
+        if (feedbackEl) {
+          feedbackEl.innerHTML = `⚠️ <b>${res.message}</b><br><span style="font-size:0.83rem;color:#f3ca7e;">Gợi ý từ tấm thiệp: 🌹 Hoa Hồng ➔ 👑 Vương Miện ➔ 💖 Trái Tim ➔ 💍 Kim Cương (Bấm ô 1 để chuyển từ 🍀 sang 🌹 nhé vợ!)</span>`;
+          feedbackEl.classList.remove('shake');
+          void feedbackEl.offsetWidth;
+          feedbackEl.classList.add('shake');
+        }
       }
     });
   }
@@ -750,7 +757,9 @@ function bindModalControls() {
       } else if (key === 'ENTER') {
         const res = engine.verify_safe_code(safeInputText);
         sound.play(res.sound_effect);
+        const feedbackEl = document.getElementById('safe-feedback');
         if (res.success) {
+          if (feedbackEl) feedbackEl.innerHTML = '';
           const afterDlg = document.querySelector('[data-hotspot="safe"]')?.getAttribute('data-dialogue-after');
           showDialogue(afterDlg || res.message);
           closeAllModals();
@@ -758,6 +767,12 @@ function bindModalControls() {
           updateSceneSprites();
         } else {
           showDialogue(res.message);
+          if (feedbackEl) {
+            feedbackEl.innerHTML = `⚠️ <b>${res.message}</b><br><span style="font-size:0.83rem;color:#f3ca7e;">Gợi ý: Dấu nụ hôn môi son hơ nến ➔ V O Y E U (Vợ Yêu)</span>`;
+            feedbackEl.classList.remove('shake');
+            void feedbackEl.offsetWidth;
+            feedbackEl.classList.add('shake');
+          }
         }
       } else {
         if (safeInputText.length < 5) {
@@ -815,7 +830,9 @@ function bindModalControls() {
     btnSubmitChest.addEventListener('click', () => {
       const res = engine.verify_final_chest(chestDials[0], chestDials[1], chestDials[2], chestDials[3]);
       sound.play(res.sound_effect);
+      const feedbackEl = document.getElementById('chest-feedback');
       if (res.success && res.trigger_win) {
+        if (feedbackEl) feedbackEl.innerHTML = '';
         const afterDlg = document.querySelector('[data-hotspot="final_chest"]')?.getAttribute('data-dialogue-after');
         showDialogue(afterDlg || res.message);
         closeAllModals();
@@ -824,6 +841,12 @@ function bindModalControls() {
         triggerPhase2Bouquet();
       } else {
         showDialogue(res.message);
+        if (feedbackEl) {
+          feedbackEl.innerHTML = `⚠️ <b>${res.message}</b><br><span style="font-size:0.83rem;color:#f3ca7e;">Gợi ý: Gắn đủ 2 mảnh tim vàng & nhập ngày đại lễ 2 0 1 0</span>`;
+          feedbackEl.classList.remove('shake');
+          void feedbackEl.offsetWidth;
+          feedbackEl.classList.add('shake');
+        }
       }
     });
   }
@@ -878,12 +901,9 @@ function bindModalControls() {
 }
 
 /* ========================================================
-   MODAL TỜ THIỆP CẢM NHIỆT (PHÓNG TO & CHỈNH SỬA THEO Ý THÍCH)
+   MODAL TỜ THIỆP CẢM NHIỆT (BAN CÔNG)
    ======================================================== */
-let cardZoomLevel = 1.0;
-
 export function openInspectCardModal() {
-  // Cập nhật trạng thái mực cảm nhiệt ẩn hay hiện dựa trên cây nến đã thắp chưa
   const hintUnlit = document.getElementById('thermal-hint-unlit');
   const cluesLit = document.getElementById('thermal-clues-lit');
   if (engine && engine.candle_lit) {
@@ -894,242 +914,7 @@ export function openInspectCardModal() {
     if (cluesLit) cluesLit.style.display = 'none';
   }
 
-  // Tải nội dung thiệp tùy chỉnh đã lưu nếu có
-  const savedCard = localStorage.getItem('custom_inspect_card');
-  if (savedCard) {
-    try {
-      const data = JSON.parse(savedCard);
-      const msgEl = document.getElementById('inspect-card-message');
-      const signEl = document.getElementById('inspect-card-sign');
-      if (data.message && msgEl) msgEl.innerText = data.message;
-      if (data.sign && signEl) signEl.innerHTML = data.sign;
-    } catch (e) {
-      console.warn('Lỗi parse thiệp tùy chỉnh:', e);
-    }
-  }
-
   openCustomModal('modal-inspect-card');
-}
-
-function bindInspectCardControls() {
-  const sheet = document.getElementById('inspect-card-sheet');
-  const zoomText = document.getElementById('zoom-card-level');
-
-  function applyCardZoom() {
-    if (sheet) {
-      sheet.style.transform = `scale(${cardZoomLevel})`;
-    }
-    if (zoomText) {
-      zoomText.innerText = `${Math.round(cardZoomLevel * 100)}%`;
-    }
-  }
-
-  document.getElementById('btn-zoom-card-in')?.addEventListener('click', () => {
-    cardZoomLevel = Math.min(2.5, +(cardZoomLevel + 0.15).toFixed(2));
-    applyCardZoom();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-zoom-card-out')?.addEventListener('click', () => {
-    cardZoomLevel = Math.max(0.6, +(cardZoomLevel - 0.15).toFixed(2));
-    applyCardZoom();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-zoom-card-reset')?.addEventListener('click', () => {
-    cardZoomLevel = 1.0;
-    applyCardZoom();
-    sound.play('click');
-  });
-
-  // Chỉnh sửa nội dung thiệp theo ý thích
-  const btnEdit = document.getElementById('btn-edit-card-content');
-  const form = document.getElementById('card-customizer-form');
-  const inpMsg = document.getElementById('card-inp-msg');
-  const inpSign = document.getElementById('card-inp-sign');
-  const btnSave = document.getElementById('btn-save-card-custom');
-  const btnCancel = document.getElementById('btn-cancel-card-custom');
-  const msgEl = document.getElementById('inspect-card-message');
-  const signEl = document.getElementById('inspect-card-sign');
-
-  if (btnEdit && form) {
-    btnEdit.addEventListener('click', () => {
-      sound.play('click');
-      const isVisible = form.style.display !== 'none';
-      if (isVisible) {
-        form.style.display = 'none';
-      } else {
-        if (inpMsg && msgEl) inpMsg.value = msgEl.innerText;
-        if (inpSign && signEl) {
-          inpSign.value = signEl.innerText.replace(/^Chàng trai luôn yêu thương vợ:\s*/, '').trim();
-        }
-        form.style.display = 'block';
-      }
-    });
-  }
-
-  if (btnSave) {
-    btnSave.addEventListener('click', () => {
-      sound.play('pickup');
-      const newMsg = inpMsg ? inpMsg.value.trim() : '';
-      const newSign = inpSign ? inpSign.value.trim() : '';
-      if (newMsg && msgEl) {
-        msgEl.innerText = newMsg;
-      }
-      if (newSign && signEl) {
-        signEl.innerHTML = `Chàng trai luôn yêu thương vợ: <b>${newSign}</b>`;
-      }
-      localStorage.setItem('custom_inspect_card', JSON.stringify({
-        message: newMsg,
-        sign: newSign ? `Chàng trai luôn yêu thương vợ: <b>${newSign}</b>` : undefined
-      }));
-      if (form) form.style.display = 'none';
-      showDialogue("Đã lưu nội dung Tờ Thiệp theo ý thích của bạn thành công! ✨");
-    });
-  }
-
-  if (btnCancel && form) {
-    btnCancel.addEventListener('click', () => {
-      sound.play('click');
-      form.style.display = 'none';
-    });
-  }
-}
-
-/* ========================================================
-   PHÓNG TO / THU NHỎ & ĐIỀU CHỈNH VỊ TRÍ BỨC THƯ TÌNH (PHASE 2)
-   ======================================================== */
-let letterZoomLevel = 1.0;
-let letterPosX = 0;
-let letterPosY = 0;
-
-function bindLoveLetterZoomControls() {
-  const sheet = document.getElementById('parchment-sheet');
-  const indicator = document.getElementById('letter-zoom-indicator');
-  const zoomBar = document.getElementById('letter-zoom-bar');
-  const dragHandle = document.getElementById('letter-zoom-drag-handle');
-
-  function updateTransform() {
-    if (sheet) {
-      sheet.style.transform = `translate(${letterPosX}px, ${letterPosY}px) scale(${letterZoomLevel})`;
-      sheet.style.transformOrigin = 'top center';
-    }
-    if (indicator) {
-      indicator.innerText = `${Math.round(letterZoomLevel * 100)}% | (${letterPosX}, ${letterPosY})`;
-    }
-  }
-
-  document.getElementById('btn-letter-zoom-in')?.addEventListener('click', () => {
-    letterZoomLevel = Math.min(2.5, +(letterZoomLevel + 0.15).toFixed(2));
-    updateTransform();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-letter-zoom-out')?.addEventListener('click', () => {
-    letterZoomLevel = Math.max(0.6, +(letterZoomLevel - 0.15).toFixed(2));
-    updateTransform();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-letter-zoom-reset')?.addEventListener('click', () => {
-    letterZoomLevel = 1.0;
-    letterPosX = 0;
-    letterPosY = 0;
-    updateTransform();
-    sound.play('click');
-  });
-
-  // Điều chỉnh vị trí bức thư bằng nút bấm
-  document.getElementById('btn-letter-pos-up')?.addEventListener('click', () => {
-    letterPosY -= 50;
-    updateTransform();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-letter-pos-down')?.addEventListener('click', () => {
-    letterPosY += 50;
-    updateTransform();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-letter-pos-left')?.addEventListener('click', () => {
-    letterPosX -= 50;
-    updateTransform();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-letter-pos-right')?.addEventListener('click', () => {
-    letterPosX += 50;
-    updateTransform();
-    sound.play('click');
-  });
-
-  document.getElementById('btn-letter-pos-center')?.addEventListener('click', () => {
-    letterPosX = 0;
-    letterPosY = 0;
-    updateTransform();
-    sound.play('click');
-  });
-
-  // Kéo thả trực tiếp tờ giấy thư (Drag & Drop to Pan)
-  if (sheet) {
-    let isDraggingSheet = false;
-    let startX = 0, startY = 0;
-    let startPosX = 0, startPosY = 0;
-
-    sheet.addEventListener('mousedown', (e) => {
-      if (e.target.closest('#btn-finished-reading') || e.target.closest('button')) return;
-      isDraggingSheet = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      startPosX = letterPosX;
-      startPosY = letterPosY;
-      sheet.style.cursor = 'grabbing';
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDraggingSheet) return;
-      letterPosX = startPosX + (e.clientX - startX);
-      letterPosY = startPosY + (e.clientY - startY);
-      updateTransform();
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isDraggingSheet) {
-        isDraggingSheet = false;
-        sheet.style.cursor = 'grab';
-      }
-    });
-  }
-
-  // Kéo thả thanh điều khiển Zoom Bar đến vị trí tiện lợi bất kỳ
-  if (zoomBar && dragHandle) {
-    let isDraggingBar = false;
-    let barStartX = 0, barStartY = 0;
-    let initLeft = 20, initTop = 18;
-
-    dragHandle.addEventListener('mousedown', (e) => {
-      isDraggingBar = true;
-      barStartX = e.clientX;
-      barStartY = e.clientY;
-      const rect = zoomBar.getBoundingClientRect();
-      initLeft = rect.left;
-      initTop = rect.top;
-      e.preventDefault();
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDraggingBar) return;
-      zoomBar.style.left = `${initLeft + (e.clientX - barStartX)}px`;
-      zoomBar.style.top = `${initTop + (e.clientY - barStartY)}px`;
-      zoomBar.style.right = 'auto';
-      zoomBar.style.bottom = 'auto';
-    });
-
-    window.addEventListener('mouseup', () => {
-      isDraggingBar = false;
-    });
-  }
 }
 
 function stepDial(type, index, delta) {
